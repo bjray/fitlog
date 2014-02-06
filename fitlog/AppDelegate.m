@@ -7,13 +7,68 @@
 //
 
 #import "AppDelegate.h"
+#import "StackMob.h"
+
+#define PUBLIC_KEY @"0e015430-7c84-4bb3-b25d-e2519ed706bb"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    SM_CACHE_ENABLED = YES;
+    
+    self.client = [[SMClient alloc] initWithAPIVersion:@"0" publicKey:PUBLIC_KEY];
+    self.coreDataStore = [ self.client coreDataStoreWithManagedObjectModel:self.managedObjectModel];
+    
+
+    [self.coreDataStore setFetchPolicy:SMFetchPolicyCacheOnly];
+    
+    __block SMCoreDataStore *blockCoreDataStore = self.coreDataStore;
+    
+    
+    [self.client.networkMonitor setNetworkStatusChangeBlock:^(SMNetworkStatus status) {
+        if (status == SMNetworkStatusReachable) {
+            // Initiate sync
+            [blockCoreDataStore syncWithServer];
+        }
+        else {
+            // Handle offline mode
+            [blockCoreDataStore setFetchPolicy:SMFetchPolicyCacheOnly];
+        }
+    }];
+    
+    [self.coreDataStore setSyncCompletionCallback:^(NSArray *objects) {
+        NSLog(@"Sync complete.");
+        // Our syncing is complete, so change the policy to fetch from the network
+        [blockCoreDataStore setFetchPolicy:SMFetchPolicyTryNetworkElseCache];
+        
+        // Notify other views that they should reload their data from the network
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FinishedSync" object:nil];
+    }];
+    
+    [self.coreDataStore setSyncCallbackForFailedInserts:^(NSArray *objects) {
+        NSLog(@"Sync Failure on Inserts");
+    }];
+    
+    [self.coreDataStore setSyncCallbackForFailedUpdates:^(NSArray *objects) {
+        NSLog(@"Sync Failure on Updates");
+    }];
+    
+    [self.coreDataStore setSyncCallbackForFailedDeletes:^(NSArray *objects) {
+        NSLog(@"Sync Failure on Deletes");
+    }];
     return YES;
+}
+
+- (NSManagedObjectModel *)managedObjectModel {
+    if (_managedObjectModel != nil) {
+        return _managedObjectModel;
+    }
+    
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"ActivityModel" withExtension:@"momd"];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    return _managedObjectModel;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -22,6 +22,14 @@
 		B6117DDA18A2A7C30004826A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6117DB918A2A7C30004826A /* UIKit.framework */; };
 		B6117DE218A2A7C30004826A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B6117DE018A2A7C30004826A /* InfoPlist.strings */; };
 		B6117DE418A2A7C30004826A /* fitlogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6117DE318A2A7C30004826A /* fitlogTests.m */; };
+		B612C9A618A2F99E00873167 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612C9A518A2F99E00873167 /* CoreData.framework */; };
+		B612C9A818A2F9B100873167 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612C9A718A2F9B100873167 /* Security.framework */; };
+		B612C9AA18A2F9BA00873167 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612C9A918A2F9BA00873167 /* SystemConfiguration.framework */; };
+		B612C9AC18A2F9C200873167 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612C9AB18A2F9C200873167 /* MobileCoreServices.framework */; };
+		B612C9AE18A2F9CA00873167 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612C9AD18A2F9CA00873167 /* CoreLocation.framework */; };
+		B612C9B118A2FB8B00873167 /* fitlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B612C9AF18A2FB8B00873167 /* fitlog.xcdatamodeld */; };
+		B612C9B418A2FC8700873167 /* Activity_Type.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B318A2FC8700873167 /* Activity_Type.m */; };
+		B612C9B518A2FC8700873167 /* Activity_Type.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B318A2FC8700873167 /* Activity_Type.m */; };
 		B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995618A2DCA5000AA95C /* ActivityViewController.m */; };
 		B697995E18A2DCF6000AA95C /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995D18A2DCF6000AA95C /* SessionViewController.m */; };
 		B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996018A2DD15000AA95C /* ActivityLogViewController.m */; };
@@ -61,6 +69,14 @@
 		B6117DDF18A2A7C30004826A /* fitlogTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "fitlogTests-Info.plist"; sourceTree = "<group>"; };
 		B6117DE118A2A7C30004826A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B6117DE318A2A7C30004826A /* fitlogTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fitlogTests.m; sourceTree = "<group>"; };
+		B612C9A518A2F99E00873167 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		B612C9A718A2F9B100873167 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B612C9A918A2F9BA00873167 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B612C9AB18A2F9C200873167 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		B612C9AD18A2F9CA00873167 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B612C9B018A2FB8B00873167 /* fitlog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = fitlog.xcdatamodel; sourceTree = "<group>"; };
+		B612C9B218A2FC8700873167 /* Activity_Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity_Type.h; sourceTree = "<group>"; };
+		B612C9B318A2FC8700873167 /* Activity_Type.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity_Type.m; sourceTree = "<group>"; };
 		B697995518A2DCA5000AA95C /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		B697995618A2DCA5000AA95C /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		B697995C18A2DCF6000AA95C /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
@@ -78,6 +94,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B612C9AE18A2F9CA00873167 /* CoreLocation.framework in Frameworks */,
+				B612C9AC18A2F9C200873167 /* MobileCoreServices.framework in Frameworks */,
+				B612C9AA18A2F9BA00873167 /* SystemConfiguration.framework in Frameworks */,
+				B612C9A818A2F9B100873167 /* Security.framework in Frameworks */,
+				B612C9A618A2F99E00873167 /* CoreData.framework in Frameworks */,
 				B6117DB818A2A7C30004826A /* CoreGraphics.framework in Frameworks */,
 				B6117DBA18A2A7C30004826A /* UIKit.framework in Frameworks */,
 				B6117DB618A2A7C30004826A /* Foundation.framework in Frameworks */,
@@ -121,6 +142,11 @@
 		B6117DB418A2A7C30004826A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B612C9AD18A2F9CA00873167 /* CoreLocation.framework */,
+				B612C9AB18A2F9C200873167 /* MobileCoreServices.framework */,
+				B612C9A918A2F9BA00873167 /* SystemConfiguration.framework */,
+				B612C9A718A2F9B100873167 /* Security.framework */,
+				B612C9A518A2F99E00873167 /* CoreData.framework */,
 				B6117DB518A2A7C30004826A /* Foundation.framework */,
 				B6117DB718A2A7C30004826A /* CoreGraphics.framework */,
 				B6117DB918A2A7C30004826A /* UIKit.framework */,
@@ -194,6 +220,9 @@
 		B697995918A2DCB2000AA95C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B612C9AF18A2FB8B00873167 /* fitlog.xcdatamodeld */,
+				B612C9B218A2FC8700873167 /* Activity_Type.h */,
+				B612C9B318A2FC8700873167 /* Activity_Type.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -351,9 +380,11 @@
 				B6117DC618A2A7C30004826A /* AppDelegate.m in Sources */,
 				B6117DCC18A2A7C30004826A /* FirstViewController.m in Sources */,
 				B697996418A2DD2D000AA95C /* SettingsViewController.m in Sources */,
+				B612C9B118A2FB8B00873167 /* fitlog.xcdatamodeld in Sources */,
 				B6117DC218A2A7C30004826A /* main.m in Sources */,
 				B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */,
 				B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */,
+				B612C9B418A2FC8700873167 /* Activity_Type.m in Sources */,
 				B697995E18A2DCF6000AA95C /* SessionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B612C9B518A2FC8700873167 /* Activity_Type.m in Sources */,
 				B6117DE418A2A7C30004826A /* fitlogTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -577,6 +609,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B612C9AF18A2FB8B00873167 /* fitlog.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B612C9B018A2FB8B00873167 /* fitlog.xcdatamodel */,
+			);
+			currentVersion = B612C9B018A2FB8B00873167 /* fitlog.xcdatamodel */;
+			path = fitlog.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B6117DAA18A2A7C30004826A /* Project object */;
 }
