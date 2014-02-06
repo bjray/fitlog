@@ -14,8 +14,6 @@
 		B6117DC218A2A7C30004826A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6117DC118A2A7C30004826A /* main.m */; };
 		B6117DC618A2A7C30004826A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6117DC518A2A7C30004826A /* AppDelegate.m */; };
 		B6117DC918A2A7C30004826A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6117DC718A2A7C30004826A /* Main.storyboard */; };
-		B6117DCC18A2A7C30004826A /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6117DCB18A2A7C30004826A /* FirstViewController.m */; };
-		B6117DCF18A2A7C30004826A /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6117DCE18A2A7C30004826A /* SecondViewController.m */; };
 		B6117DD118A2A7C30004826A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6117DD018A2A7C30004826A /* Images.xcassets */; };
 		B6117DD818A2A7C30004826A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6117DD718A2A7C30004826A /* XCTest.framework */; };
 		B6117DD918A2A7C30004826A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6117DB518A2A7C30004826A /* Foundation.framework */; };
@@ -30,6 +28,8 @@
 		B612C9B118A2FB8B00873167 /* fitlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B612C9AF18A2FB8B00873167 /* fitlog.xcdatamodeld */; };
 		B612C9B418A2FC8700873167 /* Activity_Type.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B318A2FC8700873167 /* Activity_Type.m */; };
 		B612C9B518A2FC8700873167 /* Activity_Type.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B318A2FC8700873167 /* Activity_Type.m */; };
+		B612C9B818A311E100873167 /* FavoriteActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B718A311E100873167 /* FavoriteActivityViewController.m */; };
+		B612C9B918A311E100873167 /* FavoriteActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B718A311E100873167 /* FavoriteActivityViewController.m */; };
 		B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995618A2DCA5000AA95C /* ActivityViewController.m */; };
 		B697995E18A2DCF6000AA95C /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995D18A2DCF6000AA95C /* SessionViewController.m */; };
 		B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996018A2DD15000AA95C /* ActivityLogViewController.m */; };
@@ -59,10 +59,6 @@
 		B6117DC418A2A7C30004826A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B6117DC518A2A7C30004826A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B6117DC818A2A7C30004826A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B6117DCA18A2A7C30004826A /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		B6117DCB18A2A7C30004826A /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		B6117DCD18A2A7C30004826A /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		B6117DCE18A2A7C30004826A /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		B6117DD018A2A7C30004826A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B6117DD618A2A7C30004826A /* fitlogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fitlogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6117DD718A2A7C30004826A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -77,6 +73,8 @@
 		B612C9B018A2FB8B00873167 /* fitlog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = fitlog.xcdatamodel; sourceTree = "<group>"; };
 		B612C9B218A2FC8700873167 /* Activity_Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity_Type.h; sourceTree = "<group>"; };
 		B612C9B318A2FC8700873167 /* Activity_Type.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity_Type.m; sourceTree = "<group>"; };
+		B612C9B618A311E100873167 /* FavoriteActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteActivityViewController.h; sourceTree = "<group>"; };
+		B612C9B718A311E100873167 /* FavoriteActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteActivityViewController.m; sourceTree = "<group>"; };
 		B697995518A2DCA5000AA95C /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		B697995618A2DCA5000AA95C /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		B697995C18A2DCF6000AA95C /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
@@ -209,10 +207,8 @@
 				B697996018A2DD15000AA95C /* ActivityLogViewController.m */,
 				B697996218A2DD2D000AA95C /* SettingsViewController.h */,
 				B697996318A2DD2D000AA95C /* SettingsViewController.m */,
-				B6117DCA18A2A7C30004826A /* FirstViewController.h */,
-				B6117DCB18A2A7C30004826A /* FirstViewController.m */,
-				B6117DCD18A2A7C30004826A /* SecondViewController.h */,
-				B6117DCE18A2A7C30004826A /* SecondViewController.m */,
+				B612C9B618A311E100873167 /* FavoriteActivityViewController.h */,
+				B612C9B718A311E100873167 /* FavoriteActivityViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -376,14 +372,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6117DCF18A2A7C30004826A /* SecondViewController.m in Sources */,
 				B6117DC618A2A7C30004826A /* AppDelegate.m in Sources */,
-				B6117DCC18A2A7C30004826A /* FirstViewController.m in Sources */,
 				B697996418A2DD2D000AA95C /* SettingsViewController.m in Sources */,
 				B612C9B118A2FB8B00873167 /* fitlog.xcdatamodeld in Sources */,
 				B6117DC218A2A7C30004826A /* main.m in Sources */,
 				B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */,
 				B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */,
+				B612C9B818A311E100873167 /* FavoriteActivityViewController.m in Sources */,
 				B612C9B418A2FC8700873167 /* Activity_Type.m in Sources */,
 				B697995E18A2DCF6000AA95C /* SessionViewController.m in Sources */,
 			);
@@ -393,6 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B612C9B918A311E100873167 /* FavoriteActivityViewController.m in Sources */,
 				B612C9B518A2FC8700873167 /* Activity_Type.m in Sources */,
 				B6117DE418A2A7C30004826A /* fitlogTests.m in Sources */,
 			);

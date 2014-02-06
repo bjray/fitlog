@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  FavoriteActivityViewController.h
 //  fitlog
 //
 //  Created by B.J. Ray on 2/5/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface FavoriteActivityViewController : UIViewController
 
 @end
