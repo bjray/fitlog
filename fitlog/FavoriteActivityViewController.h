@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FavoriteActivityViewController : UIViewController
-
+@interface FavoriteActivityViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end

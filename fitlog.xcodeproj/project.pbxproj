@@ -30,6 +30,7 @@
 		B612C9B518A2FC8700873167 /* Activity_Type.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B318A2FC8700873167 /* Activity_Type.m */; };
 		B612C9B818A311E100873167 /* FavoriteActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B718A311E100873167 /* FavoriteActivityViewController.m */; };
 		B612C9B918A311E100873167 /* FavoriteActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B718A311E100873167 /* FavoriteActivityViewController.m */; };
+		B612C9C518A34F9100873167 /* FLActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9C418A34F9100873167 /* FLActivityManager.m */; };
 		B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995618A2DCA5000AA95C /* ActivityViewController.m */; };
 		B697995E18A2DCF6000AA95C /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995D18A2DCF6000AA95C /* SessionViewController.m */; };
 		B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996018A2DD15000AA95C /* ActivityLogViewController.m */; };
@@ -75,6 +76,8 @@
 		B612C9B318A2FC8700873167 /* Activity_Type.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity_Type.m; sourceTree = "<group>"; };
 		B612C9B618A311E100873167 /* FavoriteActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteActivityViewController.h; sourceTree = "<group>"; };
 		B612C9B718A311E100873167 /* FavoriteActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteActivityViewController.m; sourceTree = "<group>"; };
+		B612C9C318A34F9100873167 /* FLActivityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivityManager.h; sourceTree = "<group>"; };
+		B612C9C418A34F9100873167 /* FLActivityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityManager.m; sourceTree = "<group>"; };
 		B697995518A2DCA5000AA95C /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		B697995618A2DCA5000AA95C /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		B697995C18A2DCF6000AA95C /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 				B612C9AF18A2FB8B00873167 /* fitlog.xcdatamodeld */,
 				B612C9B218A2FC8700873167 /* Activity_Type.h */,
 				B612C9B318A2FC8700873167 /* Activity_Type.m */,
+				B612C9C318A34F9100873167 /* FLActivityManager.h */,
+				B612C9C418A34F9100873167 /* FLActivityManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 		B6117DAA18A2A7C30004826A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = FL;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = 109Software;
 				TargetAttributes = {
@@ -372,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B612C9C518A34F9100873167 /* FLActivityManager.m in Sources */,
 				B6117DC618A2A7C30004826A /* AppDelegate.m in Sources */,
 				B697996418A2DD2D000AA95C /* SettingsViewController.m in Sources */,
 				B612C9B118A2FB8B00873167 /* fitlog.xcdatamodeld in Sources */,
