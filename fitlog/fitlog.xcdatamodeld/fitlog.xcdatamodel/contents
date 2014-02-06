@@ -7,7 +7,12 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sm_owner" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="User" syncable="YES">
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="favorites" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity_Type" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Activity_Type" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="User" positionX="-117" positionY="243" width="128" height="73"/>
     </elements>
 </model>

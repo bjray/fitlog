@@ -57,7 +57,7 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActivityTypeCell" textLabel="m6V-4x-30y" style="IBUITableViewCellStyleDefault" id="a5v-UQ-CYq">
                                         <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a5v-UQ-CYq">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a5v-UQ-CYq" id="Kbv-Ge-aEh">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -88,6 +88,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vGS-i5-Ndz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1771" y="698"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="nsB-HO-RgG">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="KkX-aP-qrr" customClass="FLLoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DVy-3O-FSp"/>
+                        <viewControllerLayoutGuide type="bottom" id="pRU-oa-U6F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jVo-tO-UEH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SbN-Jh-zlM">
+                                <rect key="frame" x="-7" y="179" width="335" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="facebooklogin">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginHandler:" destination="KkX-aP-qrr" eventType="touchUpInside" id="oNM-Ii-6Ma"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b9x-n6-h16">
+                                <rect key="frame" x="125" y="231" width="61" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutHandler:" destination="KkX-aP-qrr" eventType="touchUpInside" id="tAl-y5-0Kp"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="loginBtn" destination="SbN-Jh-zlM" id="UIG-V2-1vQ"/>
+                        <outlet property="logoutBtn" destination="b9x-n6-h16" id="bxQ-7i-6r6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8V1-zx-3Sa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-380" y="964"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="n0h-zg-KBa">
@@ -305,6 +349,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="facebooklogin" width="280" height="44"/>
         <image name="first" width="30" height="30"/>
         <image name="logTab" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
