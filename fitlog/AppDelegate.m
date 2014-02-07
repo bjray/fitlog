@@ -8,8 +8,13 @@
 
 #import "AppDelegate.h"
 #import "StackMob.h"
+#import "FLLoginViewController.h"
 
 #define PUBLIC_KEY @"0e015430-7c84-4bb3-b25d-e2519ed706bb"
+
+@interface AppDelegate()
+@property (nonatomic, strong) FLLoginViewController *loginController;
+@end
 
 @implementation AppDelegate
 
@@ -91,6 +96,31 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSLog(@"here");
+    [self presentUserLogin];
+    
+    
+}
+
+- (void)presentUserLogin {
+    UITabBarController *tbc = (UITabBarController *)self.window.rootViewController;
+    UIViewController *aVC = tbc.selectedViewController;
+    
+    
+    // Grab the storyboard
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    if (self.loginController == nil) {
+        self.loginController = (FLLoginViewController *)[storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    }
+    
+    
+    self.loginController.delegate = self;
+    [aVC presentViewController:self.loginController animated:YES completion:nil];
+    
+}
+
+- (void)successfulAuthentication {
+    NSLog(@"simulate authenticated");
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

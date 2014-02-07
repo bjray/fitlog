@@ -36,10 +36,11 @@
 }
 
 - (IBAction)loginHandler:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.delegate successfulAuthentication];
 }
 
 - (IBAction)logoutHandler:(id)sender {
 }
-- (IBAction)loginHandler:(id)sender {
-}
+
 @end
