@@ -13,6 +13,8 @@
 @class SMClient;
 @class SMCoreDataStore;
 
+extern NSString *const SCSessionStateChangedNotification;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, FLLoginDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

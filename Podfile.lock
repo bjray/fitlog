@@ -1,5 +1,6 @@
 PODS:
   - AFNetworking (1.1.0)
+  - Facebook-iOS-SDK (3.12.0)
   - HexColors (2.2.1)
   - LBBlurredImage (0.1.0)
   - MBProgressHUD (0.8)
@@ -9,6 +10,7 @@ PODS:
     - HexColors
 
 DEPENDENCIES:
+  - Facebook-iOS-SDK (~> 3.12.0)
   - LBBlurredImage
   - MBProgressHUD (~> 0.8)
   - StackMob
@@ -16,6 +18,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 761a418233d280c1e0580bcb76ff9cb4c3073d17
+  Facebook-iOS-SDK: c09f7d80db5c48170ff834bc03ebe774c49d1f5b
   HexColors: 3a68db077cd6572a8f7d4aa1add284dd2436a934
   LBBlurredImage: f44c432794e2a8a225f4c8a563aa1bd713b6b4c5
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622

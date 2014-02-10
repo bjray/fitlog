@@ -7,11 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FLLoginDelegate.h"
 @class  User;
+@class Activity_Type;
 
 @interface FLUserManager : NSObject
-@property (nonatomic, retain) User *user;
 
-- (void)checkAuthentication;
++(instancetype)sharedManager;
+
+@property (nonatomic, retain) User *user;
+@property (weak, nonatomic) id<FLLoginDelegate> delegate;
+
+
+- (BOOL)checkAuthentication;
+- (void)openFacebookSession;
+- (void)saveFavorites:(NSArray *)favorites;
+- (void)saveActivity:(Activity_Type *)activity forDate:(NSDate *)date;
+//- (void)saveSession
+- (void)logoutUser;
+
 
 @end

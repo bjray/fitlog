@@ -9,14 +9,28 @@
 #import "AppDelegate.h"
 #import "StackMob.h"
 #import "FLLoginViewController.h"
+#import "FLUserManager.h"
+#import "FBSession.h"
 
 #define PUBLIC_KEY @"0e015430-7c84-4bb3-b25d-e2519ed706bb"
 
+NSString *const SCSessionStateChangedNotification =
+@"com.facebook.Scrumptious:SCSessionStateChangedNotification";
+
 @interface AppDelegate()
 @property (nonatomic, strong) FLLoginViewController *loginController;
+@property BOOL didRequestLogin;    //sorry about this :(
 @end
 
 @implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    return [FBSession.activeSession handleOpenURL:url];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -63,6 +77,10 @@
     [self.coreDataStore setSyncCallbackForFailedDeletes:^(NSArray *objects) {
         NSLog(@"Sync Failure on Deletes");
     }];
+    
+    [FLUserManager sharedManager].delegate = self;
+
+    
     return YES;
 }
 
@@ -96,31 +114,52 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    NSLog(@"here");
-    [self presentUserLogin];
     
+    [self checkAuthentication];
+}
+
+- (void)checkAuthentication {
     
+    if (![self.client isLoggedIn]) {
+        NSLog(@"client is logged in");
+    }
+    //check if user is authenticated...
+    if (![[FLUserManager sharedManager] checkAuthentication]) {
+        [self presentUserLogin];
+    }
+    
+    //register signal to follow up when received the answer...
 }
 
 - (void)presentUserLogin {
     UITabBarController *tbc = (UITabBarController *)self.window.rootViewController;
     UIViewController *aVC = tbc.selectedViewController;
     
-    
     // Grab the storyboard
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     if (self.loginController == nil) {
+        NSLog(@"appDelegate forcing modal logincontroller...");
         self.loginController = (FLLoginViewController *)[storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        
+        [aVC presentViewController:self.loginController animated:YES completion:nil];
+        self.didRequestLogin = YES;
     }
     
     
-    self.loginController.delegate = self;
-    [aVC presentViewController:self.loginController animated:YES completion:nil];
+//    self.loginController.delegate = self;
+    
     
 }
 
 - (void)successfulAuthentication {
-    NSLog(@"simulate authenticated");
+    
+
+    if (self.didRequestLogin) {
+        [self.loginController dismissViewControllerAnimated:YES completion:nil];
+        self.didRequestLogin = NO;
+        NSLog(@"app delegate dismissing login controller...");
+    }
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

@@ -18,5 +18,6 @@
 - (NSInteger)itemCount;
 
 - (void)getAllActivityTypes;
+- (void)commitTransactions;
 - (void)tableViewCell:(UITableViewCell *)cell toggleFavoriteAtIndexPath:(NSIndexPath *)indexPath;
 @end

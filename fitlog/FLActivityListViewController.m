@@ -1,18 +1,18 @@
 //
-//  ActivityViewController.m
+//  FLActivityListViewController.m
 //  fitlog
 //
-//  Created by B.J. Ray on 2/5/14.
+//  Created by B.J. Ray on 2/8/14.
 //  Copyright (c) 2014 109Software. All rights reserved.
 //
 
-#import "ActivityViewController.h"
+#import "FLActivityListViewController.h"
 
-@interface ActivityViewController ()
+@interface FLActivityListViewController ()
 
 @end
 
-@implementation ActivityViewController
+@implementation FLActivityListViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +35,4 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)recordSessionHandler:(id)sender {
-}
 @end

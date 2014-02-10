@@ -4,4 +4,5 @@ pod 'StackMob'
 pod 'LBBlurredImage'
 pod 'TSMessages'
 pod 'MBProgressHUD', '~> 0.8'
+pod 'Facebook-iOS-SDK', '~> 3.12.0'
 

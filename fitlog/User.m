@@ -2,7 +2,7 @@
 //  User.m
 //  fitlog
 //
-//  Created by B.J. Ray on 2/6/14.
+//  Created by B.J. Ray on 2/10/14.
 //  Copyright (c) 2014 109Software. All rights reserved.
 //
 
@@ -13,6 +13,8 @@
 @implementation User
 
 @dynamic username;
+@dynamic sm_owner;
+@dynamic createddate;
 @dynamic favorites;
 
 @end
