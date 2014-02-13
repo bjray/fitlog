@@ -113,6 +113,10 @@
     if (indexPath.row == 7) {
         //go to activity full list...
         [self performSegueWithIdentifier:@"ActivityFullListSegue" sender:self];
+    } else if (indexPath.row >= [FLActivityManager sharedManager].favoriteActivitiesTypes.count) {
+        NSString *activity = @"new activity";
+        NSLog(@"Selected activity: %@,  in row: %d", activity, indexPath.row);
+        [self performSegueWithIdentifier:@"ActivityDetailsSegue" sender:self];
     } else {
         //go to activity details...
         NSString *activity = [[FLActivityManager sharedManager].favoriteActivitiesTypes objectAtIndex:indexPath.row];
