@@ -31,15 +31,29 @@
 
     self.navigationItem.title = @"Favorites";
     
-    //TODO: Replace with ReactiveCocoa
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveSyncDidFinishNotification:) name:@"FinishedSync" object:nil];
+    //observe changes to activityTypes collection...
+    [[RACObserve([FLActivityManager sharedManager], activityTypes)
+     deliverOn:RACScheduler.mainThreadScheduler]
+    subscribeNext:^(NSNumber *newItemCount) {
+        NSLog(@"observed a signal!!!");
+        [self.tableView reloadData];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFetchDidFinishNotification:) name:@"FinishedFetch" object:nil];
-    
-    //TODO: Here for now because this class isn't intantiated when the notification is fired...
+    //Here for now because this class isn't intantiated when the notification is fired...
     [self fetchData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    //TODO:
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -47,33 +61,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - These methods are temporary
-//Used until I introduce signals...
-
 - (void)fetchData {
-    [[FLActivityManager sharedManager] getAllActivityTypes];
+    [[FLActivityManager sharedManager] fetchAllActivityTypes];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Loading...";
 }
 
-//TODO: This needs to be removed and we need to use Signals instead
-- (void)didReceiveSyncDidFinishNotification:(NSNotification *)notification {
-    NSLog(@"Sync Finished notification received");
-    [self fetchData];
-}
-//TODO: Remove this as well...
-- (void)didReceiveFetchDidFinishNotification:(NSNotification *)notification {
-    NSLog(@"Fetch Finished notification received");
-    [self.tableView reloadData];
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-}
-
-
 #pragma mark - TableView methods...
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return [[FLActivityManager sharedManager] itemCount];
+    return [[FLActivityManager sharedManager] itemCount].integerValue;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -88,6 +85,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [[FLActivityManager sharedManager] tableViewCell:cell toggleFavoriteAtIndexPath:indexPath];
+    
+    
+    //user selected this row
+    // I want to visually update
+    // you need to update datastore
+    // you know the status, i just have the responsibility to inform the UI
+    // now, what to do with this?
+    // isFavoriteActivityAtIndex:(NSIndex *)indexPath
+    
 }
 
 @end

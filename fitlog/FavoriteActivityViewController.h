@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ReactiveCocoa/ReactiveCocoa/ReactiveCocoa.h>
 
 @interface FavoriteActivityViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

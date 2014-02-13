@@ -7,17 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <ReactiveCocoa/ReactiveCocoa/ReactiveCocoa.h>
+@class Activity_Type;
 
 @interface FLActivityManager : NSObject
+@property (nonatomic, strong, readonly) NSArray *activityTypes;
+@property (nonatomic, strong) NSArray *favoriteActivitiesTypes;
 
 +(instancetype)sharedManager;
 
 - (NSString *)nameAtIndexPath:(NSIndexPath *) indexPath;
 - (NSString *)idAtIndexPath:(NSIndexPath *) indexPath;
-- (NSInteger)itemCount;
+- (NSNumber *)itemCount;
 
-- (void)getAllActivityTypes;
-- (void)commitTransactions;
+- (void)fetchAllActivityTypes;
+- (RACSignal *)saveFavorite:(Activity_Type *)activity;
+
+//- (RACSignal *)fetchAllActivityTypes;
 - (void)tableViewCell:(UITableViewCell *)cell toggleFavoriteAtIndexPath:(NSIndexPath *)indexPath;
 @end

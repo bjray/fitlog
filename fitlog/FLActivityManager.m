@@ -10,11 +10,13 @@
 #import <CoreData/CoreData.h>
 #import "StackMob.h"
 #import "Activity_Type.h"
+#import "FLUserManager.h"
+#import "User.h"
 
 @interface FLActivityManager()
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSArray *activityTypes;
+@property (strong, nonatomic, readwrite) NSArray *activityTypes;
 @property (strong, nonatomic) NSMutableArray *favoriteTypes;
 
 @end
@@ -39,6 +41,7 @@
         self.managedObjectContext = [[[SMClient defaultClient] coreDataStore] contextForCurrentThread];
         self.favoriteTypes = [NSMutableArray array];
         self.activityTypes = [NSArray array];
+        
     }
     
     return self;
@@ -54,8 +57,8 @@
     return atype.activity_type_id;
 }
 
-- (NSInteger)itemCount {
-    return [self.activityTypes count];
+- (NSNumber *)itemCount {
+    return [NSNumber numberWithInteger:[self.activityTypes count]];
 }
 
 - (void)tableViewCell:(UITableViewCell *)cell toggleFavoriteAtIndexPath:(NSIndexPath *)indexPath {
@@ -71,25 +74,53 @@
     }
 }
 
-- (void)commitTransactions {
-    
-}
-
 
 #pragma mark - Data Requests...
 //TODO: Extract the datasource outside the controller...
-- (void)getAllActivityTypes {
+- (void)fetchAllActivityTypes {
     
     NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Activity_Type"];
     [self.managedObjectContext executeFetchRequest:fetch onSuccess:^(NSArray *results) {
         
         self.activityTypes = results;
-//        self.favoriteTypes = [NSMutableArray array];
-        //TODO: Remove after signals are added...
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"FinishedFetch" object:nil];
+        //TODO: temporary...
+        [self fetchFavoriteActivities];
     } onFailure:^(NSError *error) {
-        
         NSLog(@"Error: %@", [error localizedDescription]);
     }];
 }
+
+- (void)fetchFavoriteActivities {
+    //awkward, i know...
+    User *user = [FLUserManager sharedManager].user;
+    NSLog(@"# of user favorites: %d", [user.favorites count]);
+}
+
+
+//This will be used along with the method to fetch favorites and return as a single signal...maybe
+//- (RACSignal *)fetchAllActivityTypes {
+//    NSLog(@"fetching activity types...");
+//    
+//    //return a signal object - won't create a signal until someone subscribes to it...
+//    return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+//
+//        //go get the data from SM
+//        NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Activity_Type"];
+//        [self.managedObjectContext executeFetchRequest:fetch onSuccess:^(NSArray *results) {
+//            
+//            [subscriber sendNext:results];
+//
+//        } onFailure:^(NSError *error) {
+//            [subscriber sendError:error];
+//            NSLog(@"Error: %@", [error localizedDescription]);
+//        }];
+//        
+//        return [RACDisposable disposableWithBlock:^{
+//            NSLog(@"clean up destroyed singal - anything to clean?");
+//        }];
+//    }] doError:^(NSError *error) {
+//        NSLog(@"signal error: %@", [error localizedDescription]);
+//    }];
+//}
+
 @end
