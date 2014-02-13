@@ -1,18 +1,18 @@
 //
-//  SessionViewController.m
+//  FLSessionViewController.m
 //  fitlog
 //
-//  Created by B.J. Ray on 2/5/14.
+//  Created by B.J. Ray on 2/13/14.
 //  Copyright (c) 2014 109Software. All rights reserved.
 //
 
-#import "SessionViewController.h"
+#import "FLSessionViewController.h"
 
-@interface SessionViewController ()
+@interface FLSessionViewController ()
 
 @end
 
-@implementation SessionViewController
+@implementation FLSessionViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

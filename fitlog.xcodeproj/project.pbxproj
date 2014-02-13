@@ -38,8 +38,9 @@
 		B648EBF618AC977C00F44826 /* FLActivityItemCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBF418AC977C00F44826 /* FLActivityItemCollectionCell.m */; };
 		B648EBF918AC988700F44826 /* FLActivitySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBF818AC988700F44826 /* FLActivitySelectionViewController.m */; };
 		B648EBFA18AC988700F44826 /* FLActivitySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBF818AC988700F44826 /* FLActivitySelectionViewController.m */; };
+		B648EBFD18AD40D700F44826 /* FLSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBFC18AD40D700F44826 /* FLSessionViewController.m */; };
+		B648EBFE18AD40D700F44826 /* FLSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBFC18AD40D700F44826 /* FLSessionViewController.m */; };
 		B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995618A2DCA5000AA95C /* ActivityViewController.m */; };
-		B697995E18A2DCF6000AA95C /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995D18A2DCF6000AA95C /* SessionViewController.m */; };
 		B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996018A2DD15000AA95C /* ActivityLogViewController.m */; };
 		B697996418A2DD2D000AA95C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996318A2DD2D000AA95C /* SettingsViewController.m */; };
 		B6E08C9518A56A0E008C6B8A /* FLUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E08C9418A56A0E008C6B8A /* FLUserManager.m */; };
@@ -102,10 +103,10 @@
 		B648EBF418AC977C00F44826 /* FLActivityItemCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityItemCollectionCell.m; sourceTree = "<group>"; };
 		B648EBF718AC988700F44826 /* FLActivitySelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivitySelectionViewController.h; sourceTree = "<group>"; };
 		B648EBF818AC988700F44826 /* FLActivitySelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivitySelectionViewController.m; sourceTree = "<group>"; };
+		B648EBFB18AD40D700F44826 /* FLSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSessionViewController.h; sourceTree = "<group>"; };
+		B648EBFC18AD40D700F44826 /* FLSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLSessionViewController.m; sourceTree = "<group>"; };
 		B697995518A2DCA5000AA95C /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		B697995618A2DCA5000AA95C /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
-		B697995C18A2DCF6000AA95C /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
-		B697995D18A2DCF6000AA95C /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionViewController.m; sourceTree = "<group>"; };
 		B697995F18A2DD15000AA95C /* ActivityLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLogViewController.h; sourceTree = "<group>"; };
 		B697996018A2DD15000AA95C /* ActivityLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityLogViewController.m; sourceTree = "<group>"; };
 		B697996218A2DD2D000AA95C /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -248,6 +249,8 @@
 				B6E08CA118A6DB34008C6B8A /* FLActivityListViewController.m */,
 				B648EBEB18AC93BC00F44826 /* FLActivityDetailsViewController.h */,
 				B648EBEC18AC93BC00F44826 /* FLActivityDetailsViewController.m */,
+				B648EBFB18AD40D700F44826 /* FLSessionViewController.h */,
+				B648EBFC18AD40D700F44826 /* FLSessionViewController.m */,
 			);
 			name = "Tab 1";
 			sourceTree = "<group>";
@@ -255,8 +258,6 @@
 		B648EBF018AC941C00F44826 /* Tab 2 */ = {
 			isa = PBXGroup;
 			children = (
-				B697995C18A2DCF6000AA95C /* SessionViewController.h */,
-				B697995D18A2DCF6000AA95C /* SessionViewController.m */,
 			);
 			name = "Tab 2";
 			sourceTree = "<group>";
@@ -467,6 +468,7 @@
 			files = (
 				B648EBED18AC93BC00F44826 /* FLActivityDetailsViewController.m in Sources */,
 				B612C9C518A34F9100873167 /* FLActivityManager.m in Sources */,
+				B648EBFD18AD40D700F44826 /* FLSessionViewController.m in Sources */,
 				B6117DC618A2A7C30004826A /* AppDelegate.m in Sources */,
 				B648EBF518AC977C00F44826 /* FLActivityItemCollectionCell.m in Sources */,
 				B6E08C9518A56A0E008C6B8A /* FLUserManager.m in Sources */,
@@ -481,7 +483,6 @@
 				B612C9B818A311E100873167 /* FavoriteActivityViewController.m in Sources */,
 				B612C9B418A2FC8700873167 /* Activity_Type.m in Sources */,
 				B612C9DB18A4323D00873167 /* FLLoginViewController.m in Sources */,
-				B697995E18A2DCF6000AA95C /* SessionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +493,7 @@
 				B6E08CA318A6DB34008C6B8A /* FLActivityListViewController.m in Sources */,
 				B612C9B918A311E100873167 /* FavoriteActivityViewController.m in Sources */,
 				B6E08CBF18A96750008C6B8A /* User.m in Sources */,
+				B648EBFE18AD40D700F44826 /* FLSessionViewController.m in Sources */,
 				B648EBF618AC977C00F44826 /* FLActivityItemCollectionCell.m in Sources */,
 				B612C9B518A2FC8700873167 /* Activity_Type.m in Sources */,
 				B648EBEE18AC93BC00F44826 /* FLActivityDetailsViewController.m in Sources */,
