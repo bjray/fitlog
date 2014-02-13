@@ -73,7 +73,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Activity" image="first" id="u1e-5L-l1D"/>
+                    <tabBarItem key="tabBarItem" title="Activity" image="activity" id="u1e-5L-l1D"/>
                     <navigationItem key="navigationItem" id="2uG-Xw-Q1y"/>
                     <connections>
                         <outlet property="collectionView" destination="3ap-IZ-mxe" id="Q36-Sx-f7N"/>
@@ -180,9 +180,56 @@
                     <view key="view" contentMode="scaleToFill" id="icF-y4-2Ut">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMa-vf-ldr">
+                                <rect key="frame" x="20" y="143" width="280" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="58"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTS-gv-8bJ">
+                                <rect key="frame" x="115" y="245" width="90" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="play">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="togglePausePlayHandler:" destination="6FT-1K-bCf" eventType="touchUpInside" id="5pY-br-QAc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJj-8F-are">
+                                <rect key="frame" x="20" y="333" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="24"/>
+                                <state key="normal" title="stop and save session">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveHandler:" destination="6FT-1K-bCf" eventType="touchUpInside" id="fRf-Ee-f0V"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ef2-Se-hos">
+                                <rect key="frame" x="115" y="395" width="90" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                <state key="normal" title="reset">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetHandler:" destination="6FT-1K-bCf" eventType="touchUpInside" id="JeM-IE-fWj"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="x53-Uc-0vB"/>
+                    <connections>
+                        <outlet property="pausePlayBtn" destination="bTS-gv-8bJ" id="Kgj-3r-z87"/>
+                        <outlet property="resetBtn" destination="ef2-Se-hos" id="aim-qJ-TAg"/>
+                        <outlet property="saveBtn" destination="qJj-8F-are" id="P0Q-k1-Q2Q"/>
+                        <outlet property="timerLabel" destination="AMa-vf-ldr" id="0r6-Cc-XCn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bsX-8z-4Im" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -460,7 +507,7 @@
                             <constraint firstItem="29h-N2-YGT" firstAttribute="leading" secondItem="gMD-aP-Fq6" secondAttribute="leading" constant="20" symbolic="YES" id="cZb-4y-dRN"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Session" image="second" id="Z7h-1E-pvt"/>
+                    <tabBarItem key="tabBarItem" title="Session" image="session" id="Z7h-1E-pvt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
             </objects>
@@ -489,10 +536,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="activity" width="30" height="30"/>
         <image name="facebooklogin" width="280" height="44"/>
-        <image name="first" width="30" height="30"/>
         <image name="logTab" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="play" width="55" height="55"/>
+        <image name="session" width="30" height="30"/>
         <image name="settingTab" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

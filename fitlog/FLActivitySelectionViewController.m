@@ -90,9 +90,11 @@
     
     FLActivityItemCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ActivityItemCell" forIndexPath:indexPath];
     cell.layer.cornerRadius = 5;
-    cell.layer.masksToBounds = YES;
+//    cell.layer.masksToBounds = YES;
     cell.layer.masksToBounds = NO;
-    cell.layer.shadowOpacity = 0.0f;
+    cell.layer.shadowOpacity = 0.9f;
+    cell.layer.shadowRadius = 0.5;
+    cell.layer.shadowOffset = CGSizeMake(0.5f, 0.5f);
     
     if (row == 7) {
         cell.activityLabel.text = @"view all";
