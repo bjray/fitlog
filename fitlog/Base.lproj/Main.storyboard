@@ -48,14 +48,71 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Activity" image="first" id="u1e-5L-l1D"/>
+                    <navigationItem key="navigationItem" id="2uG-Xw-Q1y"/>
                     <connections>
                         <outlet property="pageControl" destination="3a7-EU-enn" id="ke2-93-UL9"/>
                         <outlet property="scrollView" destination="7aS-is-BRG" id="OK4-Pm-ByA"/>
+                        <segue destination="DDo-s7-fjk" kind="push" id="UZh-ak-g7q"/>
+                        <segue destination="dsC-UK-Gdg" kind="push" id="Vh9-F0-Nfu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="757" y="-737"/>
+            <point key="canvasLocation" x="1193" y="-712"/>
+        </scene>
+        <!--Activity Details View Controller-->
+        <scene sceneID="8Qx-Ff-HPH">
+            <objects>
+                <viewController id="DDo-s7-fjk" customClass="FLActivityDetailsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uJl-J7-xWC"/>
+                        <viewControllerLayoutGuide type="bottom" id="ULR-Dt-hzJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pkR-nd-djN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8VX-qa-140"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fvG-bD-8Dh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1687" y="-1394"/>
+        </scene>
+        <!--Navigation Controller - Item-->
+        <scene sceneID="Oib-ry-1FP">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="vqT-dT-3OE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="G1Q-LX-XZi"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xgp-pO-N5a">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="CZ4-MO-1fc" kind="relationship" relationship="rootViewController" id="VKu-Mk-lkB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QsG-wa-xyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="757" y="-712"/>
+        </scene>
+        <!--Activity List View Controller-->
+        <scene sceneID="aLX-bz-HpW">
+            <objects>
+                <viewController id="dsC-UK-Gdg" customClass="FLActivityListViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="10t-40-4Yg"/>
+                        <viewControllerLayoutGuide type="bottom" id="xpX-bB-kp9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1ib-a4-1M7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jNt-H9-6pw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BgW-NH-UCy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1687" y="-712"/>
         </scene>
         <!--Favorite Activity View Controller-->
         <scene sceneID="jvf-Pp-4Os">
@@ -338,7 +395,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="CZ4-MO-1fc" kind="relationship" relationship="viewControllers" id="SUk-Ux-ee1"/>
+                        <segue destination="vqT-dT-3OE" kind="relationship" relationship="viewControllers" id="LUB-Kf-R7w"/>
                         <segue destination="QUy-BD-bpt" kind="relationship" relationship="viewControllers" id="M8t-EP-wfW"/>
                         <segue destination="zCd-Se-Hvi" kind="relationship" relationship="viewControllers" id="i9M-zK-cIC"/>
                         <segue destination="Xqr-RG-BCt" kind="relationship" relationship="viewControllers" id="nUY-bX-eDc"/>
