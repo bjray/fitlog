@@ -6,7 +6,9 @@ fitlog is a simple, intuitive fitness tracking application for individuals that 
 In the end there are many, many (and many and many...) fitness apps.  We hope this one proves interesting due to its sheer simplicity.  Thank you for stopping by.
 
 # Using the project
-Nothing special here, unless you aren't familiar with CocoaPods, but be sure to always use the .xcworkspace file when opening the project in Xcode.
+When building the first time, be sure to run pod install to pull down all of the libraries.  Also, you currently won't be able to log in unless you are added to the Facebook app (which is not currently public). Obviously, you can fork it and set up your own FB app and StackMob account.
+
+After you've installed the frameworks via CocoaPods, but be sure to always use the .xcworkspace file when opening the project in Xcode.  For more info see [CocoaPods](http://cocoapods.org).
 
 # Motivation
 fitlog is the brainchild of B.J. Ray and is being brought to life through the combined contributions of B.J. and Ryan LaMountain (UX extraordinaire). It is a simple and modest iOS based project that incorporates several technologies that we just wanted more familiarity with.  In addition, we hope it provides an example of our capabilities in this space.  Hopefully there will be some interesting things within this project for you to find.  Some of those are:
@@ -19,7 +21,7 @@ fitlog is the brainchild of B.J. Ray and is being brought to life through the co
 
 
 # Goals
-Personally, we hope to illustrate good design and development skills in this project.  This should span both the external interface and the code inside.  One pattern I hope to practice in this project is the avoidance of checking for nil.  To put more clearly, to not focus on the absence of something, focus on having a case (i.e a success) for "nothing".  I've picked this up from a Podcast by the guys over at Thoughbot.
+Personally, we hope to illustrate good design and development skills in this project.  This should span both the external interface and the code inside.  
 
 # Roadmap
 Well, its hard to say and I'm sure it will evolve, but here is what we are thinking...
