@@ -9,9 +9,9 @@
 #import "FLActivitySelectionViewController.h"
 #import "FLActivityItemCollectionCell.h"
 #import "FLActivityManager.h"
+#import "MBProgressHUD.h"
 
 @interface FLActivitySelectionViewController ()
-@property (nonatomic, retain)NSArray *activities;   //Temp
 @end
 
 @implementation FLActivitySelectionViewController
@@ -28,15 +28,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    self.activities = @[@"Running",@"Boxing",@"Mini Murph",@"Sprint - ladders",@"Cycling",@"Hill Repeats",@"Abs", @"View All"];
     self.navigationItem.title = @"Log an Activity";
+    
+    
+    //observe changes to activityTypes collection...
+    [[RACObserve([FLActivityManager sharedManager], favoriteActivitiesTypes)
+      deliverOn:RACScheduler.mainThreadScheduler]
+     subscribeNext:^(NSNumber *newItemCount) {
+         NSLog(@"observed favoriteActivitiesTypes signal!!!");
+         [self.collectionView reloadData];
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+         
+     }];
+    [self fetchData];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)fetchData {
+    [[FLActivityManager sharedManager] fetchAllActivityTypes];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Loading...";
 }
 
 #pragma mark - User Actions
@@ -59,7 +76,8 @@
 
 #pragma mark - UICollectionView Datasource
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.activities.count;
+//    return [FLActivityManager sharedManager].favoriteActivitiesTypes.count;
+    return 8;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -67,13 +85,23 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger activityCount = [FLActivityManager sharedManager].favoriteActivitiesTypes.count;
+    NSInteger row = indexPath.row;
+    
     FLActivityItemCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ActivityItemCell" forIndexPath:indexPath];
     cell.layer.cornerRadius = 5;
     cell.layer.masksToBounds = YES;
     cell.layer.masksToBounds = NO;
     cell.layer.shadowOpacity = 0.9f;
     
-    cell.activityLabel.text = [self.activities objectAtIndex:indexPath.row];
+    if (row == 7) {
+        cell.activityLabel.text = @"view all";
+    } else if (row >= activityCount) {
+        cell.activityLabel.text = @"+";
+    } else {
+        cell.activityLabel.text = [[FLActivityManager sharedManager].favoriteActivitiesTypes objectAtIndex:row];
+    }
+    
     
     return cell;
 }
@@ -87,7 +115,7 @@
         [self performSegueWithIdentifier:@"ActivityFullListSegue" sender:self];
     } else {
         //go to activity details...
-        NSString *activity = [self.activities objectAtIndex:indexPath.row];
+        NSString *activity = [[FLActivityManager sharedManager].favoriteActivitiesTypes objectAtIndex:indexPath.row];
         NSLog(@"Selected activity: %@,  in row: %d", activity, indexPath.row);
         [self performSegueWithIdentifier:@"ActivityDetailsSegue" sender:self];
     }

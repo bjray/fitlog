@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ReactiveCocoa/ReactiveCocoa/ReactiveCocoa.h>
 
 @interface FLActivitySelectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 - (IBAction)recordSessionHandler:(id)sender;

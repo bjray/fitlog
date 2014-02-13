@@ -12,7 +12,7 @@
 
 @interface FLActivityManager : NSObject
 @property (nonatomic, strong, readonly) NSArray *activityTypes;
-@property (nonatomic, strong) NSArray *favoriteActivitiesTypes;
+@property (nonatomic, strong, readonly) NSArray *favoriteActivitiesTypes;
 
 +(instancetype)sharedManager;
 
@@ -21,7 +21,8 @@
 - (NSNumber *)itemCount;
 
 - (void)fetchAllActivityTypes;
-- (RACSignal *)saveFavorite:(Activity_Type *)activity;
+- (void)fetchFavoriteActivities;
+//- (RACSignal *)saveFavorite:(Activity_Type *)activity;
 
 //- (RACSignal *)fetchAllActivityTypes;
 - (void)tableViewCell:(UITableViewCell *)cell toggleFavoriteAtIndexPath:(NSIndexPath *)indexPath;

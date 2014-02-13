@@ -17,6 +17,9 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic, readwrite) NSArray *activityTypes;
+@property (nonatomic, strong, readwrite) NSArray *favoriteActivitiesTypes;
+
+//TODO: Temp to simulate selection and deselection of favorites...
 @property (strong, nonatomic) NSMutableArray *favoriteTypes;
 
 @end
@@ -92,8 +95,27 @@
 
 - (void)fetchFavoriteActivities {
     //awkward, i know...
-    User *user = [FLUserManager sharedManager].user;
-    NSLog(@"# of user favorites: %d", [user.favorites count]);
+    //TODO: Replace with real fetch logic...
+    
+    int r = arc4random() % 3;
+    switch (r) {
+        case 0:
+            self.favoriteActivitiesTypes = @[@"Push-ups",@"Abs", @"Pull-ups"];
+            break;
+        case 1:
+            self.favoriteActivitiesTypes = @[@"Running",@"Boxing",@"Mini Murph",@"Sprint - ladders",@"Cycling",@"Hill Repeats",@"Abs"];
+            break;
+        case 2:
+            self.favoriteActivitiesTypes = @[@"Windy walks",@"Skipping",@"Tickle Fights"];
+            break;
+        case 3:
+            self.favoriteActivitiesTypes = @[@"Lift Weights",@"Break dancing",@"Wrestling",@"Screaming", @"Jump Rope",@"Farm lovin",@"Slap Ass"];
+            break;
+        default:
+            break;
+    }
+    
+    
 }
 
 
