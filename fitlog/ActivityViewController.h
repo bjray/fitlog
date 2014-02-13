@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ActivityViewController : UIViewController
-- (IBAction)recordSessionHandler:(id)sender;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+
 
 @end

@@ -34,6 +34,10 @@
 		B612C9DB18A4323D00873167 /* FLLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9DA18A4323D00873167 /* FLLoginViewController.m */; };
 		B648EBED18AC93BC00F44826 /* FLActivityDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBEC18AC93BC00F44826 /* FLActivityDetailsViewController.m */; };
 		B648EBEE18AC93BC00F44826 /* FLActivityDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBEC18AC93BC00F44826 /* FLActivityDetailsViewController.m */; };
+		B648EBF518AC977C00F44826 /* FLActivityItemCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBF418AC977C00F44826 /* FLActivityItemCollectionCell.m */; };
+		B648EBF618AC977C00F44826 /* FLActivityItemCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBF418AC977C00F44826 /* FLActivityItemCollectionCell.m */; };
+		B648EBF918AC988700F44826 /* FLActivitySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBF818AC988700F44826 /* FLActivitySelectionViewController.m */; };
+		B648EBFA18AC988700F44826 /* FLActivitySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBF818AC988700F44826 /* FLActivitySelectionViewController.m */; };
 		B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995618A2DCA5000AA95C /* ActivityViewController.m */; };
 		B697995E18A2DCF6000AA95C /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995D18A2DCF6000AA95C /* SessionViewController.m */; };
 		B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996018A2DD15000AA95C /* ActivityLogViewController.m */; };
@@ -94,6 +98,10 @@
 		B612C9DA18A4323D00873167 /* FLLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLLoginViewController.m; sourceTree = "<group>"; };
 		B648EBEB18AC93BC00F44826 /* FLActivityDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivityDetailsViewController.h; sourceTree = "<group>"; };
 		B648EBEC18AC93BC00F44826 /* FLActivityDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityDetailsViewController.m; sourceTree = "<group>"; };
+		B648EBF318AC977C00F44826 /* FLActivityItemCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivityItemCollectionCell.h; sourceTree = "<group>"; };
+		B648EBF418AC977C00F44826 /* FLActivityItemCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityItemCollectionCell.m; sourceTree = "<group>"; };
+		B648EBF718AC988700F44826 /* FLActivitySelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivitySelectionViewController.h; sourceTree = "<group>"; };
+		B648EBF818AC988700F44826 /* FLActivitySelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivitySelectionViewController.m; sourceTree = "<group>"; };
 		B697995518A2DCA5000AA95C /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		B697995618A2DCA5000AA95C /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		B697995C18A2DCF6000AA95C /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
@@ -234,8 +242,8 @@
 		B648EBEF18AC93FA00F44826 /* Tab 1 */ = {
 			isa = PBXGroup;
 			children = (
-				B697995518A2DCA5000AA95C /* ActivityViewController.h */,
-				B697995618A2DCA5000AA95C /* ActivityViewController.m */,
+				B648EBF718AC988700F44826 /* FLActivitySelectionViewController.h */,
+				B648EBF818AC988700F44826 /* FLActivitySelectionViewController.m */,
 				B6E08CA018A6DB34008C6B8A /* FLActivityListViewController.h */,
 				B6E08CA118A6DB34008C6B8A /* FLActivityListViewController.m */,
 				B648EBEB18AC93BC00F44826 /* FLActivityDetailsViewController.h */,
@@ -278,6 +286,8 @@
 		B697995818A2DCAB000AA95C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B697995518A2DCA5000AA95C /* ActivityViewController.h */,
+				B697995618A2DCA5000AA95C /* ActivityViewController.m */,
 				B648EBEF18AC93FA00F44826 /* Tab 1 */,
 				B648EBF018AC941C00F44826 /* Tab 2 */,
 				B648EBF118AC942100F44826 /* Tab 3 */,
@@ -306,6 +316,8 @@
 			isa = PBXGroup;
 			children = (
 				B6117DC718A2A7C30004826A /* Main.storyboard */,
+				B648EBF318AC977C00F44826 /* FLActivityItemCollectionCell.h */,
+				B648EBF418AC977C00F44826 /* FLActivityItemCollectionCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -456,11 +468,13 @@
 				B648EBED18AC93BC00F44826 /* FLActivityDetailsViewController.m in Sources */,
 				B612C9C518A34F9100873167 /* FLActivityManager.m in Sources */,
 				B6117DC618A2A7C30004826A /* AppDelegate.m in Sources */,
+				B648EBF518AC977C00F44826 /* FLActivityItemCollectionCell.m in Sources */,
 				B6E08C9518A56A0E008C6B8A /* FLUserManager.m in Sources */,
 				B697996418A2DD2D000AA95C /* SettingsViewController.m in Sources */,
 				B612C9B118A2FB8B00873167 /* fitlog.xcdatamodeld in Sources */,
 				B6117DC218A2A7C30004826A /* main.m in Sources */,
 				B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */,
+				B648EBF918AC988700F44826 /* FLActivitySelectionViewController.m in Sources */,
 				B6E08CA218A6DB34008C6B8A /* FLActivityListViewController.m in Sources */,
 				B6E08CBE18A96750008C6B8A /* User.m in Sources */,
 				B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */,
@@ -478,9 +492,11 @@
 				B6E08CA318A6DB34008C6B8A /* FLActivityListViewController.m in Sources */,
 				B612C9B918A311E100873167 /* FavoriteActivityViewController.m in Sources */,
 				B6E08CBF18A96750008C6B8A /* User.m in Sources */,
+				B648EBF618AC977C00F44826 /* FLActivityItemCollectionCell.m in Sources */,
 				B612C9B518A2FC8700873167 /* Activity_Type.m in Sources */,
 				B648EBEE18AC93BC00F44826 /* FLActivityDetailsViewController.m in Sources */,
 				B6E08C9618A56A0E008C6B8A /* FLUserManager.m in Sources */,
+				B648EBFA18AC988700F44826 /* FLActivitySelectionViewController.m in Sources */,
 				B6117DE418A2A7C30004826A /* fitlogTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
