@@ -92,7 +92,7 @@
     cell.layer.cornerRadius = 5;
     cell.layer.masksToBounds = YES;
     cell.layer.masksToBounds = NO;
-    cell.layer.shadowOpacity = 0.9f;
+    cell.layer.shadowOpacity = 0.0f;
     
     if (row == 7) {
         cell.activityLabel.text = @"view all";
