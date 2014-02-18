@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <ReactiveCocoa/ReactiveCocoa/ReactiveCocoa.h>
-@class Activity_Type;
+
 
 @interface FLActivityManager : NSObject
 @property (nonatomic, strong, readonly) NSArray *activityTypes;

@@ -51,6 +51,7 @@
 
 - (void)fetchData {
     [[FLActivityManager sharedManager] fetchAllActivityTypes];
+    [[FLActivityManager sharedManager] fetchFavoriteActivities];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Loading...";
