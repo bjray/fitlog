@@ -371,8 +371,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mEf-6B-V0c">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.98695582150000005" green="0.30211832220000001" blue="0.60426426899999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="sectionIndexTrackingBackgroundColor" red="0.98695582150000005" green="0.30211832220000001" blue="0.60426426899999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActivityTypeCell" id="a5v-UQ-CYq">
                                         <rect key="frame" x="0.0" y="86" width="320" height="44"/>
@@ -390,9 +388,8 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.98695582150000005" green="0.30211832220000001" blue="0.60426426899999997" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.98695582150000005" green="0.30211832220000001" blue="0.60426426899999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.50980392159999999" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -619,11 +616,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="activity" width="30" height="30"/>
-        <image name="logTab" width="30" height="30"/>
+        <image name="activity" width="95" height="45"/>
+        <image name="logTab" width="79" height="44"/>
         <image name="play" width="55" height="55"/>
-        <image name="session" width="30" height="30"/>
-        <image name="settingTab" width="30" height="30"/>
+        <image name="session" width="43" height="45"/>
+        <image name="settingTab" width="96" height="45"/>
     </resources>
     <color key="tintColor" red="0.88235294117647056" green="0.50980392156862742" blue="0.054901960784313725" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -633,6 +630,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="44z-Qp-ukE"/>
-        <segue reference="Q9u-wM-KxD"/>
+        <segue reference="J5p-Ve-Gcq"/>
     </inferredMetricsTieBreakers>
 </document>
