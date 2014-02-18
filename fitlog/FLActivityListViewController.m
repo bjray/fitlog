@@ -9,7 +9,7 @@
 #import "FLActivityListViewController.h"
 #import "FLActivityItemCell.h"
 #import "FLActivityManager.h"
-#import "Activity_Type.h"
+#import "FLActivityType.h"
 #import "MBProgressHUD.h"
 
 @interface FLActivityListViewController ()
@@ -61,7 +61,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Activity_Type *activity;
+    FLActivityType *activity;
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         static NSString *CellIdentifier = @"SearchCell";

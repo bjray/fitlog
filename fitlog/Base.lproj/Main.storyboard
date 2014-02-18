@@ -418,10 +418,10 @@
             </objects>
             <point key="canvasLocation" x="1771" y="698"/>
         </scene>
-        <!--Login View Controller-->
+        <!--View Controller-->
         <scene sceneID="nsB-HO-RgG">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="KkX-aP-qrr" customClass="FLLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="KkX-aP-qrr" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DVy-3O-FSp"/>
                         <viewControllerLayoutGuide type="bottom" id="pRU-oa-U6F"/>
@@ -429,6 +429,15 @@
                     <view key="view" contentMode="scaleToFill" id="jVo-tO-UEH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Placeholder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RP1-hP-TDN">
+                                <rect key="frame" x="115" y="273" width="91" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="a9Y-Q6-VSu"/>
@@ -622,13 +631,14 @@
         <image name="session" width="30" height="30"/>
         <image name="settingTab" width="30" height="30"/>
     </resources>
+    <color key="tintColor" red="0.88235294117647056" green="0.50980392156862742" blue="0.054901960784313725" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mbt-su-NHA"/>
-        <segue reference="Q9u-wM-KxD"/>
+        <segue reference="44z-Qp-ukE"/>
+        <segue reference="J5p-Ve-Gcq"/>
     </inferredMetricsTieBreakers>
 </document>
