@@ -7,19 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
-#import "FLLoginDelegate.h"
 
-@class SMClient;
-@class SMCoreDataStore;
 
-extern NSString *const SCSessionStateChangedNotification;
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate, FLLoginDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (strong, nonatomic) SMCoreDataStore *coreDataStore;
-@property (strong, nonatomic) SMClient *client;
 
 @end
