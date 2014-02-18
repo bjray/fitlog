@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B61054AB18B31D51003AC9E2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61054AA18B31D51003AC9E2 /* Parse.framework */; };
+		B61054AC18B31D51003AC9E2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61054AA18B31D51003AC9E2 /* Parse.framework */; };
+		B61054AF18B31E2B003AC9E2 /* FLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B61054AE18B31E2B003AC9E2 /* FLUser.m */; };
+		B61054B018B31E2B003AC9E2 /* FLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B61054AE18B31E2B003AC9E2 /* FLUser.m */; };
+		B61054B318B31E44003AC9E2 /* FLActivityType.m in Sources */ = {isa = PBXBuildFile; fileRef = B61054B218B31E44003AC9E2 /* FLActivityType.m */; };
+		B61054B418B31E44003AC9E2 /* FLActivityType.m in Sources */ = {isa = PBXBuildFile; fileRef = B61054B218B31E44003AC9E2 /* FLActivityType.m */; };
+		B61054B618B31EC0003AC9E2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61054B518B31EC0003AC9E2 /* StoreKit.framework */; };
+		B61054B818B31EC7003AC9E2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61054B718B31EC7003AC9E2 /* QuartzCore.framework */; };
+		B61054BA18B31EDD003AC9E2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B61054B918B31EDD003AC9E2 /* libz.dylib */; };
+		B61054BC18B31EE9003AC9E2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61054BB18B31EE9003AC9E2 /* CFNetwork.framework */; };
+		B61054BE18B31F01003AC9E2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61054BD18B31F01003AC9E2 /* AudioToolbox.framework */; };
 		B6117DB618A2A7C30004826A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6117DB518A2A7C30004826A /* Foundation.framework */; };
 		B6117DB818A2A7C30004826A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6117DB718A2A7C30004826A /* CoreGraphics.framework */; };
 		B6117DBA18A2A7C30004826A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6117DB918A2A7C30004826A /* UIKit.framework */; };
@@ -25,9 +36,6 @@
 		B612C9AA18A2F9BA00873167 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612C9A918A2F9BA00873167 /* SystemConfiguration.framework */; };
 		B612C9AC18A2F9C200873167 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612C9AB18A2F9C200873167 /* MobileCoreServices.framework */; };
 		B612C9AE18A2F9CA00873167 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612C9AD18A2F9CA00873167 /* CoreLocation.framework */; };
-		B612C9B118A2FB8B00873167 /* fitlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B612C9AF18A2FB8B00873167 /* fitlog.xcdatamodeld */; };
-		B612C9B418A2FC8700873167 /* Activity_Type.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B318A2FC8700873167 /* Activity_Type.m */; };
-		B612C9B518A2FC8700873167 /* Activity_Type.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B318A2FC8700873167 /* Activity_Type.m */; };
 		B612C9B818A311E100873167 /* FavoriteActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B718A311E100873167 /* FavoriteActivityViewController.m */; };
 		B612C9B918A311E100873167 /* FavoriteActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9B718A311E100873167 /* FavoriteActivityViewController.m */; };
 		B612C9C518A34F9100873167 /* FLActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9C418A34F9100873167 /* FLActivityManager.m */; };
@@ -38,8 +46,10 @@
 		B648EBF618AC977C00F44826 /* FLActivityItemCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBF418AC977C00F44826 /* FLActivityItemCollectionCell.m */; };
 		B648EBF918AC988700F44826 /* FLActivitySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBF818AC988700F44826 /* FLActivitySelectionViewController.m */; };
 		B648EBFA18AC988700F44826 /* FLActivitySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBF818AC988700F44826 /* FLActivitySelectionViewController.m */; };
+		B648EBFD18AD40D700F44826 /* FLSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBFC18AD40D700F44826 /* FLSessionViewController.m */; };
+		B648EBFE18AD40D700F44826 /* FLSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBFC18AD40D700F44826 /* FLSessionViewController.m */; };
+		B648EC0118AD47D000F44826 /* FLActivityItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EC0018AD47D000F44826 /* FLActivityItemCell.m */; };
 		B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995618A2DCA5000AA95C /* ActivityViewController.m */; };
-		B697995E18A2DCF6000AA95C /* SessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995D18A2DCF6000AA95C /* SessionViewController.m */; };
 		B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996018A2DD15000AA95C /* ActivityLogViewController.m */; };
 		B697996418A2DD2D000AA95C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996318A2DD2D000AA95C /* SettingsViewController.m */; };
 		B6E08C9518A56A0E008C6B8A /* FLUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E08C9418A56A0E008C6B8A /* FLUserManager.m */; };
@@ -49,8 +59,6 @@
 		B6E08C9C18A56DD8008C6B8A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E08C9B18A56DD8008C6B8A /* Accounts.framework */; };
 		B6E08CA218A6DB34008C6B8A /* FLActivityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E08CA118A6DB34008C6B8A /* FLActivityListViewController.m */; };
 		B6E08CA318A6DB34008C6B8A /* FLActivityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E08CA118A6DB34008C6B8A /* FLActivityListViewController.m */; };
-		B6E08CBE18A96750008C6B8A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E08CBD18A96750008C6B8A /* User.m */; };
-		B6E08CBF18A96750008C6B8A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E08CBD18A96750008C6B8A /* User.m */; };
 		C5E42671460640899A89CE66 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A31FB4D7B24B8C90380F49 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +73,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B61054AA18B31D51003AC9E2 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		B61054AD18B31E2B003AC9E2 /* FLUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLUser.h; sourceTree = "<group>"; };
+		B61054AE18B31E2B003AC9E2 /* FLUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLUser.m; sourceTree = "<group>"; };
+		B61054B118B31E44003AC9E2 /* FLActivityType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivityType.h; sourceTree = "<group>"; };
+		B61054B218B31E44003AC9E2 /* FLActivityType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityType.m; sourceTree = "<group>"; };
+		B61054B518B31EC0003AC9E2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		B61054B718B31EC7003AC9E2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B61054B918B31EDD003AC9E2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		B61054BB18B31EE9003AC9E2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		B61054BD18B31F01003AC9E2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		B6117DB218A2A7C30004826A /* fitlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fitlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6117DB518A2A7C30004826A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B6117DB718A2A7C30004826A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -87,9 +105,6 @@
 		B612C9A918A2F9BA00873167 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B612C9AB18A2F9C200873167 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B612C9AD18A2F9CA00873167 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		B612C9B018A2FB8B00873167 /* fitlog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = fitlog.xcdatamodel; sourceTree = "<group>"; };
-		B612C9B218A2FC8700873167 /* Activity_Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity_Type.h; sourceTree = "<group>"; };
-		B612C9B318A2FC8700873167 /* Activity_Type.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity_Type.m; sourceTree = "<group>"; };
 		B612C9B618A311E100873167 /* FavoriteActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteActivityViewController.h; sourceTree = "<group>"; };
 		B612C9B718A311E100873167 /* FavoriteActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteActivityViewController.m; sourceTree = "<group>"; };
 		B612C9C318A34F9100873167 /* FLActivityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivityManager.h; sourceTree = "<group>"; };
@@ -102,10 +117,12 @@
 		B648EBF418AC977C00F44826 /* FLActivityItemCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityItemCollectionCell.m; sourceTree = "<group>"; };
 		B648EBF718AC988700F44826 /* FLActivitySelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivitySelectionViewController.h; sourceTree = "<group>"; };
 		B648EBF818AC988700F44826 /* FLActivitySelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivitySelectionViewController.m; sourceTree = "<group>"; };
+		B648EBFB18AD40D700F44826 /* FLSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSessionViewController.h; sourceTree = "<group>"; };
+		B648EBFC18AD40D700F44826 /* FLSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLSessionViewController.m; sourceTree = "<group>"; };
+		B648EBFF18AD47D000F44826 /* FLActivityItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivityItemCell.h; sourceTree = "<group>"; };
+		B648EC0018AD47D000F44826 /* FLActivityItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityItemCell.m; sourceTree = "<group>"; };
 		B697995518A2DCA5000AA95C /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		B697995618A2DCA5000AA95C /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
-		B697995C18A2DCF6000AA95C /* SessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionViewController.h; sourceTree = "<group>"; };
-		B697995D18A2DCF6000AA95C /* SessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionViewController.m; sourceTree = "<group>"; };
 		B697995F18A2DD15000AA95C /* ActivityLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLogViewController.h; sourceTree = "<group>"; };
 		B697996018A2DD15000AA95C /* ActivityLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityLogViewController.m; sourceTree = "<group>"; };
 		B697996218A2DD2D000AA95C /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -118,8 +135,6 @@
 		B6E08C9B18A56DD8008C6B8A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		B6E08CA018A6DB34008C6B8A /* FLActivityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivityListViewController.h; sourceTree = "<group>"; };
 		B6E08CA118A6DB34008C6B8A /* FLActivityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityListViewController.m; sourceTree = "<group>"; };
-		B6E08CBC18A96750008C6B8A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		B6E08CBD18A96750008C6B8A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		E96DEA59AF7F46DF8B26C1F5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		E9A31FB4D7B24B8C90380F49 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -129,12 +144,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B61054B618B31EC0003AC9E2 /* StoreKit.framework in Frameworks */,
+				B61054B818B31EC7003AC9E2 /* QuartzCore.framework in Frameworks */,
+				B61054BA18B31EDD003AC9E2 /* libz.dylib in Frameworks */,
+				B61054BC18B31EE9003AC9E2 /* CFNetwork.framework in Frameworks */,
+				B61054BE18B31F01003AC9E2 /* AudioToolbox.framework in Frameworks */,
 				B6E08C9C18A56DD8008C6B8A /* Accounts.framework in Frameworks */,
 				B6E08C9A18A56DD2008C6B8A /* AdSupport.framework in Frameworks */,
 				B6E08C9818A56DCB008C6B8A /* Social.framework in Frameworks */,
 				B612C9AE18A2F9CA00873167 /* CoreLocation.framework in Frameworks */,
 				B612C9AC18A2F9C200873167 /* MobileCoreServices.framework in Frameworks */,
 				B612C9AA18A2F9BA00873167 /* SystemConfiguration.framework in Frameworks */,
+				B61054AB18B31D51003AC9E2 /* Parse.framework in Frameworks */,
 				B612C9A818A2F9B100873167 /* Security.framework in Frameworks */,
 				B612C9A618A2F99E00873167 /* CoreData.framework in Frameworks */,
 				B6117DB818A2A7C30004826A /* CoreGraphics.framework in Frameworks */,
@@ -150,6 +171,7 @@
 			files = (
 				B6117DD818A2A7C30004826A /* XCTest.framework in Frameworks */,
 				B6117DDA18A2A7C30004826A /* UIKit.framework in Frameworks */,
+				B61054AC18B31D51003AC9E2 /* Parse.framework in Frameworks */,
 				B6117DD918A2A7C30004826A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,6 +202,12 @@
 		B6117DB418A2A7C30004826A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B61054BD18B31F01003AC9E2 /* AudioToolbox.framework */,
+				B61054BB18B31EE9003AC9E2 /* CFNetwork.framework */,
+				B61054B918B31EDD003AC9E2 /* libz.dylib */,
+				B61054B718B31EC7003AC9E2 /* QuartzCore.framework */,
+				B61054B518B31EC0003AC9E2 /* StoreKit.framework */,
+				B61054AA18B31D51003AC9E2 /* Parse.framework */,
 				B6E08C9B18A56DD8008C6B8A /* Accounts.framework */,
 				B6E08C9918A56DD2008C6B8A /* AdSupport.framework */,
 				B6E08C9718A56DCB008C6B8A /* Social.framework */,
@@ -248,6 +276,8 @@
 				B6E08CA118A6DB34008C6B8A /* FLActivityListViewController.m */,
 				B648EBEB18AC93BC00F44826 /* FLActivityDetailsViewController.h */,
 				B648EBEC18AC93BC00F44826 /* FLActivityDetailsViewController.m */,
+				B648EBFB18AD40D700F44826 /* FLSessionViewController.h */,
+				B648EBFC18AD40D700F44826 /* FLSessionViewController.m */,
 			);
 			name = "Tab 1";
 			sourceTree = "<group>";
@@ -255,8 +285,6 @@
 		B648EBF018AC941C00F44826 /* Tab 2 */ = {
 			isa = PBXGroup;
 			children = (
-				B697995C18A2DCF6000AA95C /* SessionViewController.h */,
-				B697995D18A2DCF6000AA95C /* SessionViewController.m */,
 			);
 			name = "Tab 2";
 			sourceTree = "<group>";
@@ -299,15 +327,14 @@
 		B697995918A2DCB2000AA95C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B6E08CBC18A96750008C6B8A /* User.h */,
-				B6E08CBD18A96750008C6B8A /* User.m */,
-				B612C9AF18A2FB8B00873167 /* fitlog.xcdatamodeld */,
-				B612C9B218A2FC8700873167 /* Activity_Type.h */,
-				B612C9B318A2FC8700873167 /* Activity_Type.m */,
 				B612C9C318A34F9100873167 /* FLActivityManager.h */,
 				B612C9C418A34F9100873167 /* FLActivityManager.m */,
 				B6E08C9318A56A0E008C6B8A /* FLUserManager.h */,
 				B6E08C9418A56A0E008C6B8A /* FLUserManager.m */,
+				B61054AD18B31E2B003AC9E2 /* FLUser.h */,
+				B61054AE18B31E2B003AC9E2 /* FLUser.m */,
+				B61054B118B31E44003AC9E2 /* FLActivityType.h */,
+				B61054B218B31E44003AC9E2 /* FLActivityType.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -318,6 +345,8 @@
 				B6117DC718A2A7C30004826A /* Main.storyboard */,
 				B648EBF318AC977C00F44826 /* FLActivityItemCollectionCell.h */,
 				B648EBF418AC977C00F44826 /* FLActivityItemCollectionCell.m */,
+				B648EBFF18AD47D000F44826 /* FLActivityItemCell.h */,
+				B648EC0018AD47D000F44826 /* FLActivityItemCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -467,21 +496,21 @@
 			files = (
 				B648EBED18AC93BC00F44826 /* FLActivityDetailsViewController.m in Sources */,
 				B612C9C518A34F9100873167 /* FLActivityManager.m in Sources */,
+				B648EBFD18AD40D700F44826 /* FLSessionViewController.m in Sources */,
 				B6117DC618A2A7C30004826A /* AppDelegate.m in Sources */,
 				B648EBF518AC977C00F44826 /* FLActivityItemCollectionCell.m in Sources */,
 				B6E08C9518A56A0E008C6B8A /* FLUserManager.m in Sources */,
 				B697996418A2DD2D000AA95C /* SettingsViewController.m in Sources */,
-				B612C9B118A2FB8B00873167 /* fitlog.xcdatamodeld in Sources */,
 				B6117DC218A2A7C30004826A /* main.m in Sources */,
+				B61054AF18B31E2B003AC9E2 /* FLUser.m in Sources */,
+				B61054B318B31E44003AC9E2 /* FLActivityType.m in Sources */,
 				B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */,
 				B648EBF918AC988700F44826 /* FLActivitySelectionViewController.m in Sources */,
 				B6E08CA218A6DB34008C6B8A /* FLActivityListViewController.m in Sources */,
-				B6E08CBE18A96750008C6B8A /* User.m in Sources */,
+				B648EC0118AD47D000F44826 /* FLActivityItemCell.m in Sources */,
 				B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */,
 				B612C9B818A311E100873167 /* FavoriteActivityViewController.m in Sources */,
-				B612C9B418A2FC8700873167 /* Activity_Type.m in Sources */,
 				B612C9DB18A4323D00873167 /* FLLoginViewController.m in Sources */,
-				B697995E18A2DCF6000AA95C /* SessionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,11 +519,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6E08CA318A6DB34008C6B8A /* FLActivityListViewController.m in Sources */,
+				B61054B018B31E2B003AC9E2 /* FLUser.m in Sources */,
 				B612C9B918A311E100873167 /* FavoriteActivityViewController.m in Sources */,
-				B6E08CBF18A96750008C6B8A /* User.m in Sources */,
+				B648EBFE18AD40D700F44826 /* FLSessionViewController.m in Sources */,
 				B648EBF618AC977C00F44826 /* FLActivityItemCollectionCell.m in Sources */,
-				B612C9B518A2FC8700873167 /* Activity_Type.m in Sources */,
 				B648EBEE18AC93BC00F44826 /* FLActivityDetailsViewController.m in Sources */,
+				B61054B418B31E44003AC9E2 /* FLActivityType.m in Sources */,
 				B6E08C9618A56A0E008C6B8A /* FLUserManager.m in Sources */,
 				B648EBFA18AC988700F44826 /* FLActivitySelectionViewController.m in Sources */,
 				B6117DE418A2A7C30004826A /* fitlogTests.m in Sources */,
@@ -618,6 +648,10 @@
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/williamray/Projects/iOS_Projects/fitlog,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fitlog/fitlog-Prefix.pch";
 				INFOPLIST_FILE = "fitlog/fitlog-Info.plist";
@@ -633,6 +667,10 @@
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/williamray/Projects/iOS_Projects/fitlog,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fitlog/fitlog-Prefix.pch";
 				INFOPLIST_FILE = "fitlog/fitlog-Info.plist";
@@ -650,6 +688,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					/Users/williamray/Projects/iOS_Projects/fitlog,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fitlog/fitlog-Prefix.pch";
@@ -673,6 +712,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					/Users/williamray/Projects/iOS_Projects/fitlog,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fitlog/fitlog-Prefix.pch";
@@ -714,19 +754,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		B612C9AF18A2FB8B00873167 /* fitlog.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				B612C9B018A2FB8B00873167 /* fitlog.xcdatamodel */,
-			);
-			currentVersion = B612C9B018A2FB8B00873167 /* fitlog.xcdatamodel */;
-			path = fitlog.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = B6117DAA18A2A7C30004826A /* Project object */;
 }

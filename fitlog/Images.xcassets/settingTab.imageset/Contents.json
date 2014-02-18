@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "settingTab.png"
+      "filename" : "settings-grey.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "settingTab@2x.png"
+      "filename" : "settings-grey-1.png"
     }
   ],
   "info" : {

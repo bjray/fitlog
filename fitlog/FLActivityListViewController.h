@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FLActivityListViewController : UIViewController
+@interface FLActivityListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

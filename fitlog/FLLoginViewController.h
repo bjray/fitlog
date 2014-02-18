@@ -9,15 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "FLLoginDelegate.h"
 
-@interface FLLoginViewController : UIViewController <FLLoginDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
-
-@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
-@property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
-@property (weak, nonatomic) id<FLLoginDelegate> delegate;
-
-- (IBAction)loginHandler:(id)sender;
-- (IBAction)logoutHandler:(id)sender;
-
-
+@interface FLLoginViewController:UIViewController <PFLogInViewControllerDelegate>
 @end
