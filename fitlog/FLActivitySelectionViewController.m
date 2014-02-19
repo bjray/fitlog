@@ -32,7 +32,7 @@
     
     
     //observe changes to activityTypes collection...
-    [[RACObserve([FLActivityManager sharedManager], favoriteActivitiesTypes)
+    [[RACObserve([FLActivityManager sharedManager], favoriteActivityTypes)
       deliverOn:RACScheduler.mainThreadScheduler]
      subscribeNext:^(NSNumber *newItemCount) {
          NSLog(@"observed favoriteActivitiesTypes signal!!!");
@@ -86,7 +86,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger activityCount = [FLActivityManager sharedManager].favoriteActivitiesTypes.count;
+    NSInteger activityCount = [FLActivityManager sharedManager].favoriteActivityTypes.count;
     NSInteger row = indexPath.row;
     
     FLActivityItemCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ActivityItemCell" forIndexPath:indexPath];
@@ -102,7 +102,7 @@
     } else if (row >= activityCount) {
         cell.activityLabel.text = @"+";
     } else {
-        cell.activityLabel.text = [[FLActivityManager sharedManager].favoriteActivitiesTypes objectAtIndex:row];
+        cell.activityLabel.text = [[FLActivityManager sharedManager].favoriteActivityTypes objectAtIndex:row];
     }
     
     
@@ -116,13 +116,13 @@
     if (indexPath.row == 7) {
         //go to activity full list...
         [self performSegueWithIdentifier:@"ActivityFullListSegue" sender:self];
-    } else if (indexPath.row >= [FLActivityManager sharedManager].favoriteActivitiesTypes.count) {
+    } else if (indexPath.row >= [FLActivityManager sharedManager].favoriteActivityTypes.count) {
         NSString *activity = @"new activity";
         NSLog(@"Selected activity: %@,  in row: %d", activity, indexPath.row);
         [self performSegueWithIdentifier:@"ActivityDetailsSegue" sender:self];
     } else {
         //go to activity details...
-        NSString *activity = [[FLActivityManager sharedManager].favoriteActivitiesTypes objectAtIndex:indexPath.row];
+        NSString *activity = [[FLActivityManager sharedManager].favoriteActivityTypes objectAtIndex:indexPath.row];
         NSLog(@"Selected activity: %@,  in row: %d", activity, indexPath.row);
         [self performSegueWithIdentifier:@"ActivityDetailsSegue" sender:self];
     }

@@ -7,10 +7,11 @@
 //
 
 #import "FLUserManager.h"
-
+#import "FLUser.h"
 #import "AppDelegate.h"
 
 @interface FLUserManager()
+@property (nonatomic, retain, readwrite) FLUser *user;
 @end
 
 @implementation FLUserManager
@@ -34,9 +35,17 @@
     return self;
 }
 
+#pragma mark - Public Methods
+
+
+
+#pragma mark - Helper Methods
+
 - (AppDelegate *)appDelegate {
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
+
+
 
 - (BOOL)checkAuthentication {
     BOOL result = NO;
@@ -49,9 +58,9 @@
     NSLog(@"Save favorites");
 }
 
-- (void)saveActivity:(FLActivityType *)activity forDate:(NSDate *)date {
-    NSLog(@"saving activity");
-}
+//- (void)saveActivity:(FLActivityType *)activity forDate:(NSDate *)date {
+//    NSLog(@"saving activity");
+//}
 
 
 

@@ -40,6 +40,14 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
     }];
+    
+    [[RACObserve([FLActivityManager sharedManager], favoriteActivityTypes)
+      deliverOn:RACScheduler.mainThreadScheduler]
+     subscribeNext:^(NSArray *newFavs) {
+         NSLog(@"observed new fav signals!!!");
+         [self.tableView reloadData];
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -63,6 +71,7 @@
 
 - (void)fetchData {
     [[FLActivityManager sharedManager] fetchAllActivityTypes];
+    [[FLActivityManager sharedManager] fetchFavoriteActivitiesForUser:[PFUser currentUser]];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Loading...";
@@ -78,13 +87,26 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     cell.textLabel.text = [[FLActivityManager sharedManager] nameAtIndexPath:indexPath];
+    if ([[FLActivityManager sharedManager] isFavoriteAtIndexPath:indexPath]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [[FLActivityManager sharedManager] tableViewCell:cell toggleFavoriteAtIndexPath:indexPath];
+    if (cell.accessoryType == UITableViewCellAccessoryNone) {
+        //make save request...
+        [[FLActivityManager sharedManager]saveFavoriteActivityAtIndex:indexPath.row forUser:[PFUser currentUser]];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+        //make remove request...
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+//    [[FLActivityManager sharedManager] tableViewCell:cell toggleFavoriteAtIndexPath:indexPath];
     
     
     //user selected this row

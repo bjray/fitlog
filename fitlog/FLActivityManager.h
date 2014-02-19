@@ -8,22 +8,31 @@
 
 #import <Foundation/Foundation.h>
 #import <ReactiveCocoa/ReactiveCocoa/ReactiveCocoa.h>
+//@class FLUser;
+@class FLActivityType;
 
+#define FL_FAVORITE @"Favorite"
 
 @interface FLActivityManager : NSObject
 @property (nonatomic, strong, readonly) NSArray *activityTypes;
-@property (nonatomic, strong, readonly) NSArray *favoriteActivitiesTypes;
+@property (nonatomic, strong, readonly) NSArray *favoriteActivityTypes;
 
 +(instancetype)sharedManager;
 
 - (NSString *)nameAtIndexPath:(NSIndexPath *) indexPath;
 - (NSString *)idAtIndexPath:(NSIndexPath *) indexPath;
 - (NSNumber *)itemCount;
+- (BOOL)isFavoriteAtIndexPath:(NSIndexPath *) indexPath;
 
 - (void)fetchAllActivityTypes;
 - (void)fetchFavoriteActivities;
+- (void)fetchFavoriteActivitiesForUser:(PFUser *)user;
 //- (RACSignal *)saveFavorite:(Activity_Type *)activity;
 
 //- (RACSignal *)fetchAllActivityTypes;
-- (void)tableViewCell:(UITableViewCell *)cell toggleFavoriteAtIndexPath:(NSIndexPath *)indexPath;
+//- (void)tableViewCell:(UITableViewCell *)cell toggleFavoriteAtIndexPath:(NSIndexPath *)indexPath;
+//- (BOOL)saveFavoriteActivityList:(NSArray *)favorites forUser:(FLUser *)user;
+- (void)saveFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user;
+- (void)saveFavoriteActivityAtIndex:(NSUInteger)index forUser:(PFUser *)user;
+- (BOOL)removeFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user;
 @end
