@@ -9,6 +9,7 @@
 #import "FavoriteActivityViewController.h"
 #import "MBProgressHUD.h"
 #import "FLActivityManager.h"
+#import <TSMessages/TSMessage.h>
 
 @interface FavoriteActivityViewController ()
 
@@ -48,6 +49,8 @@
          [self.tableView reloadData];
          [MBProgressHUD hideHUDForView:self.view animated:YES];
      }];
+    
+    [TSMessage setDefaultViewController:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -100,21 +103,24 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
         //make save request...
-        [[FLActivityManager sharedManager]saveFavoriteActivityAtIndex:indexPath.row forUser:[PFUser currentUser]];
+        
+//        [[[FLActivityManager sharedManager]saveFavoriteActivityAtIndex:indexPath.row forUser:[PFUser currentUser]] subscribeError:^(NSError *error) {
+//            [TSMessage showNotificationWithTitle:@"Error" subtitle:@"There was a problem fetching the latest favorites." type:TSMessageNotificationTypeError];
+//        }];
+        
+        [[[FLActivityManager sharedManager]saveFavoriteActivityAtIndex:indexPath.row forUser:[PFUser currentUser]] subscribeError:^(NSError *error) {
+            [TSMessage showNotificationWithTitle:@"Error" subtitle:@"There was a problem fetching the latest favorites." type:TSMessageNotificationTypeError];
+        } completed:^{
+            [TSMessage showNotificationWithTitle:@"Yeah!" subtitle:@"How do you like them apples?" type:TSMessageNotificationTypeSuccess];
+        }];
+
+//        RACSignal *signal = [[FLActivityManager sharedManager]saveFavoriteActivityAtIndex:indexPath.row forUser:[PFUser currentUser]];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         //make remove request...
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-//    [[FLActivityManager sharedManager] tableViewCell:cell toggleFavoriteAtIndexPath:indexPath];
-    
-    
-    //user selected this row
-    // I want to visually update
-    // you need to update datastore
-    // you know the status, i just have the responsibility to inform the UI
-    // now, what to do with this?
-    // isFavoriteActivityAtIndex:(NSIndex *)indexPath
+
     
 }
 

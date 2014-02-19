@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <ReactiveCocoa/ReactiveCocoa/ReactiveCocoa.h>
-//@class FLUser;
+#import <ReactiveCocoa/ReactiveCocoa/ReactiveCocoa.h>
 @class FLActivityType;
 
 #define FL_FAVORITE @"Favorite"
@@ -32,7 +32,7 @@
 //- (RACSignal *)fetchAllActivityTypes;
 //- (void)tableViewCell:(UITableViewCell *)cell toggleFavoriteAtIndexPath:(NSIndexPath *)indexPath;
 //- (BOOL)saveFavoriteActivityList:(NSArray *)favorites forUser:(FLUser *)user;
-- (void)saveFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user;
-- (void)saveFavoriteActivityAtIndex:(NSUInteger)index forUser:(PFUser *)user;
+- (RACSignal *)saveFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user;
+- (RACSignal *)saveFavoriteActivityAtIndex:(NSUInteger)index forUser:(PFUser *)user;
 - (BOOL)removeFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user;
 @end

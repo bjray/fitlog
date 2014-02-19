@@ -147,49 +147,38 @@
     
 }
 
-- (void)saveFavoriteActivityAtIndex:(NSUInteger)index forUser:(PFUser *)user {
+- (RACSignal *)saveFavoriteActivityAtIndex:(NSUInteger)index forUser:(PFUser *)user {
     FLActivityType *activity = [self.activityTypes objectAtIndex:index];
     if (activity) {
-        [self saveFavoriteActivity:activity forUser:user];
+        return [self saveFavoriteActivity:activity forUser:user];
     } else {
         NSLog(@"Object does not exist");
+        return nil;
     }
 }
 
-- (void)saveFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user {
+- (RACSignal *)saveFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user {
 
-    NSLog(@"save favorite: %@ for user: %@", activity.name, user.username);
-    
-    NSString *objectId = [self objectIdForActivity:activity inFavoriteList:self.favoriteActivityTypes];
-    if (!objectId) {
-        PFObject *newFavorite = [self createFavoriteForActivity:activity forUser:user];
-        [newFavorite saveEventually:^(BOOL succeeded, NSError *error) {
-            NSLog(@"let the controller know that the save occurred!");
-            return <#expression#>
-            //maybe on the controller we have an activity indicator appear and disappear...
-        }];
-    } else {
-        NSLog(@"favorite already exists for this user - take no action");
-    }
-    
-    
-//    [[RACObserve(self, favoriteActivityTypes)
-//      deliverOn:RACScheduler.mainThreadScheduler]
-//     subscribeNext:^(NSArray *newFavorties) {
-//         NSLog(@"observed favoriteActivitiesTypes signal!!!");
-//         
-//         NSString *objectId = [self objectIdForActivity:activity inFavoriteList:newFavorties];
-//         if (!objectId) {
-//             PFObject *newFavorite = [self createFavoriteForActivity:activity forUser:user];
-//             [newFavorite saveEventually:^(BOOL succeeded, NSError *error) {
-//                 NSLog(@"let the controller know that the save occurred!");
-//                 //maybe on the controller we have an activity indicator appear and disappear...
-//             }];
-//         } else {
-//             NSLog(@"favorite already exists for this user - take no action");
-//         }
-//     }];
-//    [self fetchFavoriteActivities];
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        NSLog(@"save favorite: %@ for user: %@", activity.name, user.username);
+        
+        NSString *objectId = [self objectIdForActivity:activity inFavoriteList:self.favoriteActivityTypes];
+        if (!objectId) {
+            PFObject *newFavorite = [self createFavoriteForActivity:activity forUser:user];
+            [newFavorite saveEventually:^(BOOL succeeded, NSError *error) {
+                NSLog(@"let the controller know that the save occurred!");
+                if (succeeded) {
+                    [subscriber sendCompleted];
+                } else {
+                    [subscriber sendError:error];
+                }
+            }];
+        } else {
+            NSLog(@"favorite already exists for this user - take no action");
+            [subscriber sendCompleted];
+        }
+        return nil;
+    }];
 }
 
 - (BOOL)removeFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user {
@@ -242,51 +231,6 @@
 }
 
 
-// Convienence method for finding the activity based on id from the list of all activities...
-//- (FLActivityType *)activityTypeByObjectId:(NSString *)objectId {
-//    FLActivityType *activity = nil;
-//    for (FLActivityType *type in self.activityTypes) {
-//        if ([type.objectId isEqualToString:objectId]) {
-//            activity = type;
-//            break;
-//        }
-//    }
-//    
-//    return activity;
-//}
-
-//- (NSString *)objectIdForActivity:(FLActivityType *) activity andUser:(FLUser *)user {
-//    
-//
-//    
-//    
-//    // hmmm, this method will finish executing before results are retrieved...
-//    
-////    PFQuery *query = [PFQuery queryWithClassName:FL_FAVORITE];
-////    [query findObjectsInBackgroundWithTarget:self
-////                                    selector:@selector(<#selector#>)];
-////    
-////    
-////    
-////    
-////    PFQuery *query = [PFQuery queryWithClassName:FL_FAVORITE];
-////    [query whereKey:@"activityType" equalTo:activity];
-////    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-////        if (!error) {
-////            // The find succeeded.
-////            NSLog(@"Successfully retrieved %d scores.", objects.count);
-////            // Do something with the found objects
-////            for (PFObject *object in objects) {
-////                NSLog(@"%@", object.objectId);
-////            }
-////        } else {
-////            // Log details of the failure
-////            NSLog(@"Error: %@ %@", error, [error userInfo]);
-////        }
-////    }];
-//    
-//    return nil;
-//}
 
 - (RACSignal *)objectIdForActivity:(FLActivityType *) activity andUser:(PFUser *)user {
     return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
