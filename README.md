@@ -31,7 +31,7 @@ fitlog is the brainchild of B.J. Ray and is being brought to life through the co
 * Use of CocoaPods
 * Examples of TDD
 * Automated builds
-* Use of a backend REST service (StackMob)
+* Use of a backend REST service (Parse)
 * UIAppearance
 * iOS 7 features, in general
 
