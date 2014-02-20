@@ -12,6 +12,7 @@
 @class FLActivityType;
 
 #define FL_FAVORITE @"Favorite"
+#define FL_FAV_RELATION @"likes"
 
 @interface FLActivityManager : NSObject
 @property (nonatomic, strong, readonly) NSArray *activityTypes;
@@ -19,20 +20,13 @@
 
 +(instancetype)sharedManager;
 
-- (NSString *)nameAtIndexPath:(NSIndexPath *) indexPath;
-- (NSString *)idAtIndexPath:(NSIndexPath *) indexPath;
-- (NSNumber *)itemCount;
-- (BOOL)isFavoriteAtIndexPath:(NSIndexPath *) indexPath;
+- (BOOL)isFavoriteActivity:(FLActivityType *)activity within:(NSArray *)favorites;
 
-- (void)fetchAllActivityTypes;
-- (void)fetchFavoriteActivities;
-- (void)fetchFavoriteActivitiesForUser:(PFUser *)user;
-//- (RACSignal *)saveFavorite:(Activity_Type *)activity;
+- (RACSignal *)fetchAllActivityTypes;
+- (RACSignal *)fetchFavoriteActivitiesForUser:(PFUser *)user;
 
-//- (RACSignal *)fetchAllActivityTypes;
-//- (void)tableViewCell:(UITableViewCell *)cell toggleFavoriteAtIndexPath:(NSIndexPath *)indexPath;
-//- (BOOL)saveFavoriteActivityList:(NSArray *)favorites forUser:(FLUser *)user;
+
 - (RACSignal *)saveFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user;
-- (RACSignal *)saveFavoriteActivityAtIndex:(NSUInteger)index forUser:(PFUser *)user;
-- (BOOL)removeFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user;
+//- (RACSignal *)removeFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user;
+
 @end

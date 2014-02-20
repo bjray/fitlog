@@ -9,10 +9,12 @@
 #import "FavoriteActivityViewController.h"
 #import "MBProgressHUD.h"
 #import "FLActivityManager.h"
+#import "FLActivityType.h"
 #import <TSMessages/TSMessage.h>
 
 @interface FavoriteActivityViewController ()
-
+@property (nonatomic, retain) NSMutableArray *myActivities;
+@property (nonatomic, retain) NSArray *activities;
 @end
 
 @implementation FavoriteActivityViewController
@@ -31,40 +33,13 @@
     [super viewDidLoad];
 
     self.navigationItem.title = @"Favorites";
-    
-    //observe changes to activityTypes collection...
-    [[RACObserve([FLActivityManager sharedManager], activityTypes)
-     deliverOn:RACScheduler.mainThreadScheduler]
-    subscribeNext:^(NSNumber *newItemCount) {
-        NSLog(@"observed a signal!!!");
-        [self.tableView reloadData];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-    }];
-    
-    [[RACObserve([FLActivityManager sharedManager], favoriteActivityTypes)
-      deliverOn:RACScheduler.mainThreadScheduler]
-     subscribeNext:^(NSArray *newFavs) {
-         NSLog(@"observed new fav signals!!!");
-         [self.tableView reloadData];
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
-     }];
+    self.myActivities = [NSMutableArray array];
+    self.activities = [NSArray array];
     
     [TSMessage setDefaultViewController:self];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    //Here for now because this class isn't intantiated when the notification is fired...
     [self fetchData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    //TODO:
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -73,28 +48,53 @@
 }
 
 - (void)fetchData {
-    [[FLActivityManager sharedManager] fetchAllActivityTypes];
-    [[FLActivityManager sharedManager] fetchFavoriteActivitiesForUser:[PFUser currentUser]];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Loading...";
+    
+    
+    [[[FLActivityManager sharedManager] fetchAllActivityTypes] subscribeNext:^(NSArray *newActivities) {
+        NSLog(@"from fetch: %d", [newActivities count]);
+        self.activities = newActivities;
+        
+        [[[FLActivityManager sharedManager] fetchFavoriteActivitiesForUser:[PFUser currentUser]] subscribeNext:^(NSMutableArray *favs) {
+            self.myActivities = favs;
+            
+            [self.tableView reloadData];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            
+        } error:^(NSError *error) {
+            NSLog(@"inner oh no!");
+            [self displayError:error optionalMsg:nil];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+        
+        
+    } error:^(NSError *error) {
+        NSLog(@"outer oh no!");
+        [self displayError:error optionalMsg:nil];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
 }
 
 #pragma mark - TableView methods...
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[FLActivityManager sharedManager] itemCount].integerValue;
+    return self.activities.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ActivityTypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [[FLActivityManager sharedManager] nameAtIndexPath:indexPath];
-    if ([[FLActivityManager sharedManager] isFavoriteAtIndexPath:indexPath]) {
+    FLActivityType *activity = [self.activities objectAtIndex:indexPath.row];
+    cell.textLabel.text = activity.name;
+    
+    if ([[FLActivityManager sharedManager]isFavoriteActivity:activity within:self.myActivities]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
+    
     
     return cell;
 }
@@ -102,19 +102,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
-        //make save request...
+
+        FLActivityType *activity = [self.activities objectAtIndex:indexPath.row];
         
-//        [[[FLActivityManager sharedManager]saveFavoriteActivityAtIndex:indexPath.row forUser:[PFUser currentUser]] subscribeError:^(NSError *error) {
-//            [TSMessage showNotificationWithTitle:@"Error" subtitle:@"There was a problem fetching the latest favorites." type:TSMessageNotificationTypeError];
-//        }];
-        
-        [[[FLActivityManager sharedManager]saveFavoriteActivityAtIndex:indexPath.row forUser:[PFUser currentUser]] subscribeError:^(NSError *error) {
-            [TSMessage showNotificationWithTitle:@"Error" subtitle:@"There was a problem fetching the latest favorites." type:TSMessageNotificationTypeError];
+        [[[FLActivityManager sharedManager]saveFavoriteActivity:activity forUser:[PFUser currentUser]] subscribeError:^(NSError *error) {
+            [self displayError:error optionalMsg:@"Failed to save favorite."];
         } completed:^{
             [TSMessage showNotificationWithTitle:@"Yeah!" subtitle:@"How do you like them apples?" type:TSMessageNotificationTypeSuccess];
         }];
 
-//        RACSignal *signal = [[FLActivityManager sharedManager]saveFavoriteActivityAtIndex:indexPath.row forUser:[PFUser currentUser]];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         //make remove request...
@@ -122,6 +118,12 @@
     }
 
     
+}
+
+- (void)displayError:(NSError *)error optionalMsg:(NSString *)optionalMsg{
+    NSString *msg = [NSString stringWithFormat:@"%@ %@", [error localizedDescription], optionalMsg];
+    
+    [TSMessage showNotificationWithTitle:@"Error" subtitle:msg type:TSMessageNotificationTypeError];
 }
 
 @end

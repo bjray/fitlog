@@ -8,15 +8,11 @@
 
 #import "FLActivityManager.h"
 #import "FLActivityType.h"
-//#import "FLUserManager.h"
-//#import "FLUser.h"
 
 @interface FLActivityManager()
 @property (strong, nonatomic, readwrite) NSArray *activityTypes;
 @property (nonatomic, strong, readwrite) NSArray *favoriteActivityTypes;
 
-//TODO: Temp to simulate selection and deselection of favorites...
-//@property (strong, nonatomic) NSMutableArray *favoriteTypes;
 
 @end
 
@@ -37,125 +33,104 @@
 - (id)init {
     self = [super init];
     if (self) {
-//        self.favoriteTypes = [NSMutableArray array];
-        self.activityTypes = [NSArray array];
         
     }
     
     return self;
 }
 
-- (BOOL)isFavoriteAtIndexPath:(NSIndexPath *) indexPath {
-    FLActivityType *atype = [self.activityTypes objectAtIndex:indexPath.row];
+//- (BOOL)isFavoriteAtIndexPath:(NSIndexPath *) indexPath {
+//    BOOL result = NO;
+//    FLActivityType *atype = [self.activityTypes objectAtIndex:indexPath.row];
+//    
+//    result = [self.favoriteActivityTypes containsObject:atype];
+//    if (result) {
+////        NSLog(@"Found %@ as a favorite!", atype);
+//        NSLog(@"is a fav");
+//    } else {
+//        NSLog(@"not a fav");
+//    }
+//    return result;
+//}
+//
+//
+//- (NSString *)nameAtIndexPath:(NSIndexPath *) indexPath {
+//    FLActivityType *atype = [self.activityTypes objectAtIndex:indexPath.row];
+//    return atype.name;
+//}
+//
+//
+//- (NSString *)idAtIndexPath:(NSIndexPath *) indexPath {
+//    FLActivityType *atype = [self.activityTypes objectAtIndex:indexPath.row];
+//    return atype.objectId;
+//}
+//
+//- (NSNumber *)itemCount {
+//    return [NSNumber numberWithInteger:[self.activityTypes count]];
+//}
+
+- (BOOL)isFavoriteActivity:(FLActivityType *)activity within:(NSArray *)favorites {
     BOOL result = NO;
     
-    result = [self.favoriteActivityTypes containsObject:atype];
+    for (FLActivityType *anActivity in favorites) {
+        if ([anActivity.objectId isEqualToString:activity.objectId]) {
+            result = YES;
+            break;
+        }
+    }
     return result;
 }
-
-- (NSString *)nameAtIndexPath:(NSIndexPath *) indexPath {
-    FLActivityType *atype = [self.activityTypes objectAtIndex:indexPath.row];
-    return atype.name;
-}
-
-- (NSString *)idAtIndexPath:(NSIndexPath *) indexPath {
-    FLActivityType *atype = [self.activityTypes objectAtIndex:indexPath.row];
-    return atype.objectId;
-}
-
-- (NSNumber *)itemCount {
-    return [NSNumber numberWithInteger:[self.activityTypes count]];
-}
-
-//- (void)tableViewCell:(UITableViewCell *)cell toggleFavoriteAtIndexPath:(NSIndexPath *)indexPath {
-//    BOOL isFavorite = [self.favoriteTypes containsObject:[self.activityTypes objectAtIndex:indexPath.row]];
-//    if (isFavorite) {
-//        //remove from favorite
-//        [self.favoriteTypes removeObject:[self.activityTypes objectAtIndex:indexPath.row]];
-//        cell.accessoryType = UITableViewCellAccessoryNone;
-//    } else {
-//        // add to favorites
-//        [self.favoriteTypes addObject:[self.activityTypes objectAtIndex:indexPath.row]];
-//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//    }
-//}
 
 
 #pragma mark - Data Requests...
 
 // Only pull active ActivityTypes...
-- (void)fetchAllActivityTypes {
-    PFQuery *query = [PFQuery queryWithClassName:@"ActivityType"];
-    [query whereKey:@"isActive" equalTo:@YES];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            NSLog(@"retrieved %d activity types", [objects count]);
-            self.activityTypes = objects;
-        } else {
-            NSLog(@"Error: %@ %@", [error localizedDescription], [error userInfo]);
-        }
-    }];
+- (RACSignal *)fetchAllActivityTypes {
     
-}
-- (void)fetchFavoriteActivitiesForUser:(PFUser *)user {
-    NSMutableArray *favs = [NSMutableArray array];
-    PFQuery *query = [PFQuery queryWithClassName:FL_FAVORITE];
-    [query whereKey:@"user" equalTo:user];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            //do I respond with a signal here?
-            NSLog(@"successfully retrieved favorites");
-            for (PFObject *object in objects) {
-                
-                FLActivityType *activity = [self activityTypeFromFavorite:object];
-                NSLog(@"Fave activity: %@", activity.name);
-                if (activity) {
-                    [favs addObject:activity];
-                }
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        PFQuery *query = [PFQuery queryWithClassName:@"ActivityType"];
+        [query whereKey:@"isActive" equalTo:@YES];
+        [self cachePolicyForQuery:query];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                NSLog(@"retrieved %d activity types", [objects count]);
+                [subscriber sendNext:objects];
+            } else {
+                NSLog(@"Error: %@ %@", [error localizedDescription], [error userInfo]);
+                [subscriber sendError:error];
             }
-            self.favoriteActivityTypes = [NSArray arrayWithArray:favs];
-        } else {
-            //need to shoot a signal back...
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
+        }];
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"No clean up here.");
+        }];
     }];
 }
 
-- (void)fetchFavoriteActivities {
-    //awkward, i know...
-    //TODO: Replace with real fetch logic...
-    self.favoriteActivityTypes = nil;
+
+- (RACSignal *)fetchFavoriteActivitiesForUser:(PFUser *)user {
     
-//    int r = arc4random() % 3;
-//    switch (r) {
-//        case 0:
-//            self.favoriteActivityTypes = @[@"Push-ups",@"Abs", @"Pull-ups"];
-//            break;
-//        case 1:
-//            self.favoriteActivityTypes = @[@"Running",@"Boxing",@"Mini Murph",@"Sprint - ladders",@"Cycling",@"Hill Repeats",@"Abs"];
-//            break;
-//        case 2:
-//            self.favoriteActivityTypes = @[@"Windy walks",@"Skipping",@"Tickle Fights"];
-//            break;
-//        case 3:
-//            self.favoriteActivityTypes = @[@"Lift Weights",@"Break dancing",@"Wrestling",@"Screaming", @"Jump Rope",@"Farm lovin",@"Slap Ass"];
-//            break;
-//        default:
-//            break;
-//    }
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        PFRelation *relation = [user relationForKey:FL_FAV_RELATION];
+        [[relation query] findObjectsInBackgroundWithBlock:^(NSArray *favorites, NSError *error) {
+            if (!error) {
+                [subscriber sendNext:favorites];
+            } else {
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+                [subscriber sendError:error];
+            }
+            
+        }];
     
-    
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"disposal of fetching fav activities");
+        }];
+    }];
 }
 
-- (RACSignal *)saveFavoriteActivityAtIndex:(NSUInteger)index forUser:(PFUser *)user {
-    FLActivityType *activity = [self.activityTypes objectAtIndex:index];
-    if (activity) {
-        return [self saveFavoriteActivity:activity forUser:user];
-    } else {
-        NSLog(@"Object does not exist");
-        return nil;
-    }
-}
+
 
 - (RACSignal *)saveFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user {
 
@@ -164,15 +139,17 @@
         
         NSString *objectId = [self objectIdForActivity:activity inFavoriteList:self.favoriteActivityTypes];
         if (!objectId) {
-            PFObject *newFavorite = [self createFavoriteForActivity:activity forUser:user];
-            [newFavorite saveEventually:^(BOOL succeeded, NSError *error) {
-                NSLog(@"let the controller know that the save occurred!");
+            
+            PFRelation *relation = [user relationForKey:@"likes"];
+            [relation addObject:activity];
+            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
                     [subscriber sendCompleted];
                 } else {
                     [subscriber sendError:error];
                 }
             }];
+
         } else {
             NSLog(@"favorite already exists for this user - take no action");
             [subscriber sendCompleted];
@@ -181,11 +158,32 @@
     }];
 }
 
-- (BOOL)removeFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user {
-    BOOL result = NO;
-    
-    return result;
-}
+//- (RACSignal *)removeFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user {
+//    
+//    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+//        NSLog(@"attempt to remove object for user...");
+//        
+//        
+//        PFQuery *query = [PFQuery queryWithClassName:FL_FAVORITE];
+//        [query whereKey:@"activityType" equalTo:activity];
+//        [query whereKey:@"user" equalTo:user];
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//            if (!error) {
+//                // The find succeeded.
+//                NSLog(@"Successfully retrieved %d scores.", objects.count);
+//                // Do something with the found objects
+//                for (PFObject *object in objects) {
+//                    NSLog(@"%@", object.objectId);
+//                }
+//            } else {
+//                // Log details of the failure
+//                NSLog(@"Error: %@ %@", error, [error userInfo]);
+//            }
+//        }];
+//        
+//        
+//    }];
+//}
 
 #pragma mark - Helper Methods...
 
@@ -231,62 +229,11 @@
 }
 
 
-
-- (RACSignal *)objectIdForActivity:(FLActivityType *) activity andUser:(PFUser *)user {
-    return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        PFQuery *query = [PFQuery queryWithClassName:FL_FAVORITE];
-        [query whereKey:@"activityType" equalTo:activity];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                // The find succeeded.
-                NSLog(@"Successfully retrieved %d favorites.", objects.count);
-                // Do something with the found objects
-                for (PFObject *object in objects) {
-                    NSLog(@"%@", object.objectId);
-                }
-                [subscriber sendNext:[objects objectAtIndex:0]];
-            } else {
-                // Log details of the failure
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-                [subscriber sendError:error];
-            }
-        }];
-        
-        return [RACDisposable disposableWithBlock:^{
-            NSLog(@"clean up destroued signal - anything to clean?");
-        }];
-
-    }] doError:^(NSError *error) {
-         NSLog(@"signal error: %@", [error localizedDescription]);
-    }];
+- (void)cachePolicyForQuery:(PFQuery *)aQuery {
+    aQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    aQuery.maxCacheAge = 60 * 60 * 24; //one day
 }
 
 
-
-//This will be used along with the method to fetch favorites and return as a single signal...maybe
-//- (RACSignal *)fetchAllActivityTypes {
-//    NSLog(@"fetching activity types...");
-//
-//    //return a signal object - won't create a signal until someone subscribes to it...
-//    return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-//
-//        //go get the data from SM
-//        NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Activity_Type"];
-//        [self.managedObjectContext executeFetchRequest:fetch onSuccess:^(NSArray *results) {
-//
-//            [subscriber sendNext:results];
-//
-//        } onFailure:^(NSError *error) {
-//            [subscriber sendError:error];
-//            NSLog(@"Error: %@", [error localizedDescription]);
-//        }];
-//
-//        return [RACDisposable disposableWithBlock:^{
-//            NSLog(@"clean up destroyed singal - anything to clean?");
-//        }];
-//    }] doError:^(NSError *error) {
-//        NSLog(@"signal error: %@", [error localizedDescription]);
-//    }];
-//}
 
 @end

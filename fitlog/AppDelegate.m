@@ -10,8 +10,8 @@
 #import "FLUser.h"
 #import "FLActivityType.h"
 
-#define FB_APP_ID @"9ILuGQbYRPPCjss1Y1yPnto5MLjxz1iYshSc5Fz8"
-#define FB_CLIENT_KEY @"seD1rhtS5UjYI6hsJWLORZ6aDhlyaDNnHoGivEXL"
+#define PF_APP_ID @"9ILuGQbYRPPCjss1Y1yPnto5MLjxz1iYshSc5Fz8"
+#define PF_CLIENT_KEY @"seD1rhtS5UjYI6hsJWLORZ6aDhlyaDNnHoGivEXL"
 
 #define TW_CONSUMER_KEY @"obowSmqbwl11dS09Iuc1Dw"
 #define TW_CONSUMER_SECRET @"tVlfTk1FzlRN7zAAn9DYNd8mSImxWBCJctLRXBNN0U"
@@ -25,7 +25,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self initializeParseObjects];
-    [Parse setApplicationId:FB_APP_ID clientKey:FB_CLIENT_KEY];
+    [Parse setApplicationId:PF_APP_ID clientKey:PF_CLIENT_KEY];
     [PFFacebookUtils initializeFacebook];
     [PFTwitterUtils initializeWithConsumerKey:TW_CONSUMER_KEY consumerSecret:TW_CONSUMER_SECRET];
     

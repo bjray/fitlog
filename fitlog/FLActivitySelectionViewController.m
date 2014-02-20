@@ -9,9 +9,11 @@
 #import "FLActivitySelectionViewController.h"
 #import "FLActivityItemCollectionCell.h"
 #import "FLActivityManager.h"
+#import "FLActivityType.h"
 #import "MBProgressHUD.h"
 
 @interface FLActivitySelectionViewController ()
+@property (nonatomic, retain)NSArray *favoriteActivities;
 @end
 
 @implementation FLActivitySelectionViewController
@@ -29,17 +31,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"Log an Activity";
-    
-    
-    //observe changes to activityTypes collection...
-    [[RACObserve([FLActivityManager sharedManager], favoriteActivityTypes)
-      deliverOn:RACScheduler.mainThreadScheduler]
-     subscribeNext:^(NSNumber *newItemCount) {
-         NSLog(@"observed favoriteActivitiesTypes signal!!!");
-         [self.collectionView reloadData];
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
-         
-     }];
+    self.favoriteActivities = [NSArray array];
     [self fetchData];
 }
 
@@ -50,11 +42,21 @@
 }
 
 - (void)fetchData {
-    [[FLActivityManager sharedManager] fetchAllActivityTypes];
-    [[FLActivityManager sharedManager] fetchFavoriteActivities];
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Loading...";
+    
+    [[[FLActivityManager sharedManager] fetchFavoriteActivitiesForUser:[PFUser currentUser]] subscribeNext:^(NSArray *favs) {
+        self.favoriteActivities = favs;
+        
+        [self.collectionView reloadData];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    } error:^(NSError *error) {
+        NSLog(@"inner oh no!");
+//        [self displayError:error optionalMsg:nil];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
 }
 
 #pragma mark - User Actions
@@ -77,7 +79,6 @@
 
 #pragma mark - UICollectionView Datasource
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    return [FLActivityManager sharedManager].favoriteActivitiesTypes.count;
     return 8;
 }
 
@@ -86,7 +87,6 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger activityCount = [FLActivityManager sharedManager].favoriteActivityTypes.count;
     NSInteger row = indexPath.row;
     
     FLActivityItemCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ActivityItemCell" forIndexPath:indexPath];
@@ -99,10 +99,11 @@
     
     if (row == 7) {
         cell.activityLabel.text = @"view all";
-    } else if (row >= activityCount) {
+    } else if (row >= self.favoriteActivities.count) {
         cell.activityLabel.text = @"+";
     } else {
-        cell.activityLabel.text = [[FLActivityManager sharedManager].favoriteActivityTypes objectAtIndex:row];
+        FLActivityType *activity = [self.favoriteActivities objectAtIndex:row];
+        cell.activityLabel.text = activity.name;
     }
     
     
