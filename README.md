@@ -13,10 +13,10 @@ Now, because the app uses Facebook authentication and Parse, you must follow one
 1. If you know me, just ping me on Facebook and I'll add you as a developer to my fitlog app and then you should be good to go.
 
 2. If you don't know me, you will need to setup your own Parse account and Facebook app.  
-..1. Parse has some basic instructions [here](https://parse.com/tutorials/integrating-facebook-in-ios).  
-..2. Once that is complete, be sure to add your Parse app id and client key to `PF_APP_ID` and `PF_CLIENT_KEY` respectively in AppDelegate.m.
-..3. In the fitlog-info.plist file, add a key, `FacebookAppID`, and it's value as well as a key, `URL types` that contains the following structure:
-...`<array>
+  1. Parse has some basic instructions [here](https://parse.com/tutorials/integrating-facebook-in-ios).  
+  2. Once that is complete, be sure to add your Parse app id and client key to `PF_APP_ID` and `PF_CLIENT_KEY` respectively in AppDelegate.m.
+  3. In the fitlog-info.plist file, add a key, `FacebookAppID`, and it's value as well as a key, `URL types` that contains the following structure:
+   `<array>
 	<dict>
 		<key>CFBundleURLSchemes</key>
 		<array>
@@ -25,8 +25,6 @@ Now, because the app uses Facebook authentication and Parse, you must follow one
 	</dict>
 </array>
 </plist>`
-
-
 
 # Motivation
 fitlog is the brainchild of B.J. Ray and is being brought to life through the combined contributions of B.J. and Ryan LaMountain (UX extraordinaire). It is a simple and modest iOS based project that incorporates several technologies that we just wanted more familiarity with.  In addition, we hope it provides an example of our capabilities in this space.  Hopefully there will be some interesting things within this project for you to find.  Some of those are:
