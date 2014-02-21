@@ -32,6 +32,10 @@
     [super viewDidLoad];
     self.navigationItem.title = @"Log an Activity";
     self.favoriteActivities = [NSArray array];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self fetchData];
 }
 

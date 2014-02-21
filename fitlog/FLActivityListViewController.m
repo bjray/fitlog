@@ -11,9 +11,10 @@
 #import "FLActivityManager.h"
 #import "FLActivityType.h"
 #import "MBProgressHUD.h"
+#import <TSMessages/TSMessage.h>
 
 @interface FLActivityListViewController ()
-
+@property (nonatomic, retain) NSArray *activities;
 @end
 
 @implementation FLActivityListViewController
@@ -36,12 +37,37 @@
     
 	self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
     self.searchDisplayController.searchBar.barStyle = UIBarStyleBlackTranslucent;
+    [TSMessage setDefaultViewController:self];
+    self.extendedLayoutIncludesOpaqueBars = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self fetchData];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)fetchData {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Loading...";
+    
+    [[[FLActivityManager sharedManager] fetchAllActivityTypes] subscribeNext:^(NSArray *activityList) {
+        self.activities = activityList;
+        
+        [self.tableView reloadData];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    } error:^(NSError *error) {
+        NSLog(@"inner oh no!");
+        //        [self displayError:error optionalMsg:nil];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+    
 }
 
 #pragma mark - Table view data source
@@ -55,7 +81,7 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return [_searchResults count];
     } else {
-        return [FLActivityManager sharedManager].activityTypes.count;
+        return self.activities.count;
     }
 }
 
@@ -80,7 +106,7 @@
         static NSString *CellIdentifier = @"ActivityCell";
         FLActivityItemCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         
-        activity = [[FLActivityManager sharedManager].activityTypes objectAtIndex:indexPath.row];
+        activity = [self.activities objectAtIndex:indexPath.row];
         cell.activityLabel.text = activity.name;
         return cell;
     }
@@ -114,9 +140,13 @@
 
 - (NSArray *)filterActivities:(NSString *)searchText {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name contains[c] %@", searchText];
-    return [[FLActivityManager sharedManager].activityTypes filteredArrayUsingPredicate:predicate];
+    return [self.activities filteredArrayUsingPredicate:predicate];
 }
 
 #pragma mark - Helper methods...
-
+- (void)displayError:(NSError *)error optionalMsg:(NSString *)optionalMsg{
+    NSString *msg = [NSString stringWithFormat:@"%@ %@", [error localizedDescription], optionalMsg];
+    
+    [TSMessage showNotificationWithTitle:@"Error" subtitle:msg type:TSMessageNotificationTypeError];
+}
 @end
