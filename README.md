@@ -26,19 +26,6 @@ Now, because the app uses Facebook authentication and Parse, you must follow one
 </array>
 </plist>`
 
-# Motivation
-fitlog is the brainchild of B.J. Ray and is being brought to life through the combined contributions of B.J. and Ryan LaMountain (UX extraordinaire). It is a simple and modest iOS based project that incorporates several technologies that we just wanted more familiarity with.  In addition, we hope it provides an example of our capabilities in this space.  Hopefully there will be some interesting things within this project for you to find.  Some of those are:
-* Use of CocoaPods
-* Examples of TDD
-* Automated builds
-* Use of a backend REST service (Parse)
-* UIAppearance
-* iOS 7 features, in general
-
-
-# Goals
-Personally, we hope to illustrate good design and development skills in this project.  This should span both the external interface and the code inside.  
-
 # Roadmap
 Well, its hard to say and I'm sure it will evolve, but here is what we are thinking...
 * Bluetooth integration with a Polar HR monitor
