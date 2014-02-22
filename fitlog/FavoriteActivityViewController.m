@@ -101,23 +101,27 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    FLActivityType *activity = [self.activities objectAtIndex:indexPath.row];
+    
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
-
-        FLActivityType *activity = [self.activities objectAtIndex:indexPath.row];
-        
-        [[[FLActivityManager sharedManager]saveFavoriteActivity:activity forUser:[PFUser currentUser]] subscribeError:^(NSError *error) {
+        [[[FLActivityManager sharedManager] saveFavoriteActivity:activity forUser:[PFUser currentUser]] subscribeError:^(NSError *error) {
             [self displayError:error optionalMsg:@"Failed to save favorite."];
         } completed:^{
             [TSMessage showNotificationWithTitle:@"Yeah!" subtitle:@"How do you like them apples?" type:TSMessageNotificationTypeSuccess];
+            
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }];
 
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
     } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         //make remove request...
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        [[[FLActivityManager sharedManager] removeFavoriteActivity:activity forUser:[PFUser currentUser]]
+         subscribeError:^(NSError *error) {
+             [self displayError:error optionalMsg:@"Failed to remove favorite."];
+         } completed:^{
+             cell.accessoryType = UITableViewCellAccessoryNone;
+         }];
     }
-
-    
 }
 
 - (void)displayError:(NSError *)error optionalMsg:(NSString *)optionalMsg{

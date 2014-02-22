@@ -114,7 +114,10 @@
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         
         PFRelation *relation = [user relationForKey:FL_FAV_RELATION];
-        [[relation query] findObjectsInBackgroundWithBlock:^(NSArray *favorites, NSError *error) {
+        PFQuery *query = [relation query];
+        [self cachePolicyForQuery:query];
+        //[[relation query] findObjectsInBackgroundWithBlock:^(NSArray *favorites, NSError *error) {
+        [query findObjectsInBackgroundWithBlock:^(NSArray *favorites, NSError *error) {
             if (!error) {
                 [subscriber sendNext:favorites];
             } else {
@@ -158,32 +161,31 @@
     }];
 }
 
-//- (RACSignal *)removeFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user {
-//    
-//    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-//        NSLog(@"attempt to remove object for user...");
-//        
-//        
-//        PFQuery *query = [PFQuery queryWithClassName:FL_FAVORITE];
-//        [query whereKey:@"activityType" equalTo:activity];
-//        [query whereKey:@"user" equalTo:user];
-//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//            if (!error) {
-//                // The find succeeded.
-//                NSLog(@"Successfully retrieved %d scores.", objects.count);
-//                // Do something with the found objects
-//                for (PFObject *object in objects) {
-//                    NSLog(@"%@", object.objectId);
-//                }
-//            } else {
-//                // Log details of the failure
-//                NSLog(@"Error: %@ %@", error, [error userInfo]);
-//            }
-//        }];
-//        
-//        
-//    }];
-//}
+- (RACSignal *)removeFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user {
+    
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        NSLog(@"attempt to remove object for user...");
+        
+        //Check out: https://www.parse.com/questions/pfrelation-removeobject-deletes-actual-object-not-relationship
+        //remove object from relation
+        // And then save data via relation again???
+        PFRelation *relation = [[PFUser currentUser] relationForKey:FL_FAV_RELATION];
+        [relation removeObject:activity];
+        [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                [subscriber sendCompleted];
+            } else {
+                [subscriber sendError:error];
+            }
+        }];
+
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"nothign to dispose of...");
+        }];
+        
+        
+    }];
+}
 
 #pragma mark - Helper Methods...
 
@@ -230,7 +232,7 @@
 
 
 - (void)cachePolicyForQuery:(PFQuery *)aQuery {
-    aQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    aQuery.cachePolicy = kPFCachePolicyCacheThenNetwork;
     aQuery.maxCacheAge = 60 * 60 * 24; //one day
 }
 

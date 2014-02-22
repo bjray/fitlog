@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <ReactiveCocoa/ReactiveCocoa/ReactiveCocoa.h>
-#import <ReactiveCocoa/ReactiveCocoa/ReactiveCocoa.h>
 @class FLActivityType;
 
 #define FL_FAVORITE @"Favorite"
@@ -27,6 +26,6 @@
 
 
 - (RACSignal *)saveFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user;
-//- (RACSignal *)removeFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user;
+- (RACSignal *)removeFavoriteActivity:(FLActivityType *)activity forUser:(PFUser *)user;
 
 @end

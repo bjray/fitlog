@@ -49,6 +49,26 @@
 		B648EBFD18AD40D700F44826 /* FLSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBFC18AD40D700F44826 /* FLSessionViewController.m */; };
 		B648EBFE18AD40D700F44826 /* FLSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EBFC18AD40D700F44826 /* FLSessionViewController.m */; };
 		B648EC0118AD47D000F44826 /* FLActivityItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EC0018AD47D000F44826 /* FLActivityItemCell.m */; };
+		B65FCC9C18B9579600C9FF7F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B65FCC9B18B9579600C9FF7F /* libPods.a */; };
+		B65FCC9D18B959A800C9FF7F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61054B518B31EC0003AC9E2 /* StoreKit.framework */; };
+		B65FCC9E18B959AF00C9FF7F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61054B718B31EC7003AC9E2 /* QuartzCore.framework */; };
+		B65FCC9F18B959B700C9FF7F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B61054B918B31EDD003AC9E2 /* libz.dylib */; };
+		B65FCCA018B959C100C9FF7F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61054BB18B31EE9003AC9E2 /* CFNetwork.framework */; };
+		B65FCCA118B959CE00C9FF7F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61054BD18B31F01003AC9E2 /* AudioToolbox.framework */; };
+		B65FCCA218B959D400C9FF7F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E08C9B18A56DD8008C6B8A /* Accounts.framework */; };
+		B65FCCA318B959DB00C9FF7F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E08C9918A56DD2008C6B8A /* AdSupport.framework */; };
+		B65FCCA418B959E100C9FF7F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E08C9718A56DCB008C6B8A /* Social.framework */; };
+		B65FCCA518B959E800C9FF7F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612C9AD18A2F9CA00873167 /* CoreLocation.framework */; };
+		B65FCCA618B959F700C9FF7F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612C9AB18A2F9C200873167 /* MobileCoreServices.framework */; };
+		B65FCCA718B959FD00C9FF7F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612C9A918A2F9BA00873167 /* SystemConfiguration.framework */; };
+		B65FCCA818B95A0700C9FF7F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612C9A718A2F9B100873167 /* Security.framework */; };
+		B65FCCA918B95A0E00C9FF7F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6117DB718A2A7C30004826A /* CoreGraphics.framework */; };
+		B65FCCAA18B95A8300C9FF7F /* FLActivityItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B648EC0018AD47D000F44826 /* FLActivityItemCell.m */; };
+		B65FCCAB18B95A8300C9FF7F /* FLActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9C418A34F9100873167 /* FLActivityManager.m */; };
+		B65FCCAC18B95A8300C9FF7F /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995618A2DCA5000AA95C /* ActivityViewController.m */; };
+		B65FCCAD18B95A8300C9FF7F /* ActivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996018A2DD15000AA95C /* ActivityLogViewController.m */; };
+		B65FCCAE18B95A8300C9FF7F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996318A2DD2D000AA95C /* SettingsViewController.m */; };
+		B65FCCAF18B95A8300C9FF7F /* FLLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9DA18A4323D00873167 /* FLLoginViewController.m */; };
 		B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995618A2DCA5000AA95C /* ActivityViewController.m */; };
 		B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996018A2DD15000AA95C /* ActivityLogViewController.m */; };
 		B697996418A2DD2D000AA95C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996318A2DD2D000AA95C /* SettingsViewController.m */; };
@@ -121,6 +141,7 @@
 		B648EBFC18AD40D700F44826 /* FLSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLSessionViewController.m; sourceTree = "<group>"; };
 		B648EBFF18AD47D000F44826 /* FLActivityItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivityItemCell.h; sourceTree = "<group>"; };
 		B648EC0018AD47D000F44826 /* FLActivityItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityItemCell.m; sourceTree = "<group>"; };
+		B65FCC9B18B9579600C9FF7F /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		B697995518A2DCA5000AA95C /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		B697995618A2DCA5000AA95C /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		B697995F18A2DD15000AA95C /* ActivityLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLogViewController.h; sourceTree = "<group>"; };
@@ -169,6 +190,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B65FCCA918B95A0E00C9FF7F /* CoreGraphics.framework in Frameworks */,
+				B65FCCA818B95A0700C9FF7F /* Security.framework in Frameworks */,
+				B65FCCA718B959FD00C9FF7F /* SystemConfiguration.framework in Frameworks */,
+				B65FCCA618B959F700C9FF7F /* MobileCoreServices.framework in Frameworks */,
+				B65FCCA518B959E800C9FF7F /* CoreLocation.framework in Frameworks */,
+				B65FCCA418B959E100C9FF7F /* Social.framework in Frameworks */,
+				B65FCCA318B959DB00C9FF7F /* AdSupport.framework in Frameworks */,
+				B65FCCA218B959D400C9FF7F /* Accounts.framework in Frameworks */,
+				B65FCCA118B959CE00C9FF7F /* AudioToolbox.framework in Frameworks */,
+				B65FCCA018B959C100C9FF7F /* CFNetwork.framework in Frameworks */,
+				B65FCC9F18B959B700C9FF7F /* libz.dylib in Frameworks */,
+				B65FCC9E18B959AF00C9FF7F /* QuartzCore.framework in Frameworks */,
+				B65FCC9D18B959A800C9FF7F /* StoreKit.framework in Frameworks */,
+				B65FCC9C18B9579600C9FF7F /* libPods.a in Frameworks */,
 				B6117DD818A2A7C30004826A /* XCTest.framework in Frameworks */,
 				B6117DDA18A2A7C30004826A /* UIKit.framework in Frameworks */,
 				B61054AC18B31D51003AC9E2 /* Parse.framework in Frameworks */,
@@ -202,6 +237,7 @@
 		B6117DB418A2A7C30004826A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B65FCC9B18B9579600C9FF7F /* libPods.a */,
 				B61054BD18B31F01003AC9E2 /* AudioToolbox.framework */,
 				B61054BB18B31EE9003AC9E2 /* CFNetwork.framework */,
 				B61054B918B31EDD003AC9E2 /* libz.dylib */,
@@ -518,6 +554,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B65FCCAA18B95A8300C9FF7F /* FLActivityItemCell.m in Sources */,
+				B65FCCAB18B95A8300C9FF7F /* FLActivityManager.m in Sources */,
+				B65FCCAC18B95A8300C9FF7F /* ActivityViewController.m in Sources */,
+				B65FCCAD18B95A8300C9FF7F /* ActivityLogViewController.m in Sources */,
+				B65FCCAE18B95A8300C9FF7F /* SettingsViewController.m in Sources */,
+				B65FCCAF18B95A8300C9FF7F /* FLLoginViewController.m in Sources */,
 				B6E08CA318A6DB34008C6B8A /* FLActivityListViewController.m in Sources */,
 				B61054B018B31E2B003AC9E2 /* FLUser.m in Sources */,
 				B612C9B918A311E100873167 /* FavoriteActivityViewController.m in Sources */,
@@ -681,6 +723,7 @@
 		};
 		B6117DEB18A2A7C30004826A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E96DEA59AF7F46DF8B26C1F5 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/fitlog.app/fitlog";
