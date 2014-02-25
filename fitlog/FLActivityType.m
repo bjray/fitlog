@@ -17,4 +17,8 @@
     return @"ActivityType";
 }
 
+- (BOOL)isEqualToActivity:(FLActivityType *)activity {
+    return [self.objectId isEqualToString:activity.objectId];
+}
+
 @end

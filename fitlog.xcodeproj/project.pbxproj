@@ -69,6 +69,7 @@
 		B65FCCAD18B95A8300C9FF7F /* ActivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996018A2DD15000AA95C /* ActivityLogViewController.m */; };
 		B65FCCAE18B95A8300C9FF7F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996318A2DD2D000AA95C /* SettingsViewController.m */; };
 		B65FCCAF18B95A8300C9FF7F /* FLLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9DA18A4323D00873167 /* FLLoginViewController.m */; };
+		B65FCCB318B95E6E00C9FF7F /* FLActivityTypeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B65FCCB218B95E6E00C9FF7F /* FLActivityTypeTests.m */; };
 		B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995618A2DCA5000AA95C /* ActivityViewController.m */; };
 		B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996018A2DD15000AA95C /* ActivityLogViewController.m */; };
 		B697996418A2DD2D000AA95C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996318A2DD2D000AA95C /* SettingsViewController.m */; };
@@ -141,7 +142,8 @@
 		B648EBFC18AD40D700F44826 /* FLSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLSessionViewController.m; sourceTree = "<group>"; };
 		B648EBFF18AD47D000F44826 /* FLActivityItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivityItemCell.h; sourceTree = "<group>"; };
 		B648EC0018AD47D000F44826 /* FLActivityItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityItemCell.m; sourceTree = "<group>"; };
-		B65FCC9B18B9579600C9FF7F /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		B65FCC9B18B9579600C9FF7F /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		B65FCCB218B95E6E00C9FF7F /* FLActivityTypeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityTypeTests.m; sourceTree = "<group>"; };
 		B697995518A2DCA5000AA95C /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		B697995618A2DCA5000AA95C /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		B697995F18A2DD15000AA95C /* ActivityLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLogViewController.h; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 		B6117DDD18A2A7C30004826A /* fitlogTests */ = {
 			isa = PBXGroup;
 			children = (
+				B65FCCB218B95E6E00C9FF7F /* FLActivityTypeTests.m */,
 				B6117DE318A2A7C30004826A /* fitlogTests.m */,
 				B6117DDE18A2A7C30004826A /* Supporting Files */,
 			);
@@ -559,6 +562,7 @@
 				B65FCCAC18B95A8300C9FF7F /* ActivityViewController.m in Sources */,
 				B65FCCAD18B95A8300C9FF7F /* ActivityLogViewController.m in Sources */,
 				B65FCCAE18B95A8300C9FF7F /* SettingsViewController.m in Sources */,
+				B65FCCB318B95E6E00C9FF7F /* FLActivityTypeTests.m in Sources */,
 				B65FCCAF18B95A8300C9FF7F /* FLLoginViewController.m in Sources */,
 				B6E08CA318A6DB34008C6B8A /* FLActivityListViewController.m in Sources */,
 				B61054B018B31E2B003AC9E2 /* FLUser.m in Sources */,

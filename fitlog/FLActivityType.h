@@ -13,5 +13,7 @@
 
 @property (retain) NSString *name;
 //@property (retain) NSString *objectId;
+- (BOOL)isEqualToActivity:(FLActivityType *)activity;
+
 @end
 

@@ -39,41 +39,11 @@
     return self;
 }
 
-//- (BOOL)isFavoriteAtIndexPath:(NSIndexPath *) indexPath {
-//    BOOL result = NO;
-//    FLActivityType *atype = [self.activityTypes objectAtIndex:indexPath.row];
-//    
-//    result = [self.favoriteActivityTypes containsObject:atype];
-//    if (result) {
-////        NSLog(@"Found %@ as a favorite!", atype);
-//        NSLog(@"is a fav");
-//    } else {
-//        NSLog(@"not a fav");
-//    }
-//    return result;
-//}
-//
-//
-//- (NSString *)nameAtIndexPath:(NSIndexPath *) indexPath {
-//    FLActivityType *atype = [self.activityTypes objectAtIndex:indexPath.row];
-//    return atype.name;
-//}
-//
-//
-//- (NSString *)idAtIndexPath:(NSIndexPath *) indexPath {
-//    FLActivityType *atype = [self.activityTypes objectAtIndex:indexPath.row];
-//    return atype.objectId;
-//}
-//
-//- (NSNumber *)itemCount {
-//    return [NSNumber numberWithInteger:[self.activityTypes count]];
-//}
-
 - (BOOL)isFavoriteActivity:(FLActivityType *)activity within:(NSArray *)favorites {
     BOOL result = NO;
     
     for (FLActivityType *anActivity in favorites) {
-        if ([anActivity.objectId isEqualToString:activity.objectId]) {
+        if ([anActivity isEqualToActivity:activity]) {
             result = YES;
             break;
         }
