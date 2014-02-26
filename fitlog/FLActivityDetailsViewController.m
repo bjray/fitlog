@@ -7,6 +7,7 @@
 //
 
 #import "FLActivityDetailsViewController.h"
+#import <TSMessages/TSMessage.h>
 
 @interface FLActivityDetailsViewController ()
 
@@ -33,6 +34,7 @@
     self.commentsView.layer.shadowOffset = CGSizeMake(0.5f, 0.5f);
     
 	// Do any additional setup after loading the view.
+    [TSMessage setDefaultViewController:self.navigationController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,6 +44,9 @@
 }
 
 - (IBAction)saveHandler:(id)sender {
+    NSLog(@"you did it!");
+    [TSMessage showNotificationWithTitle:@"Error" subtitle:@"Save is not hooked up yet." type:TSMessageNotificationTypeError];
+    
 }
 
 - (IBAction)backgroundTap:(id)sender {

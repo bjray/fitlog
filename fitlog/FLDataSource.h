@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+@class RACSignal;
 
 @protocol FLDataSource <NSObject>
 
+- (void)findObjectsInBackgroundWithBlock:(FLArrayResultBlock)block;
+- (RACSignal *)fetchAllActivityTypes;
 @end
