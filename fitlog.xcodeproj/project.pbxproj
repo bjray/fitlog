@@ -270,6 +270,7 @@
 		B6117DBB18A2A7C30004826A /* fitlog */ = {
 			isa = PBXGroup;
 			children = (
+				B67E69B718BD4881001942E2 /* Protocols */,
 				B697995B18A2DCC1000AA95C /* Helpers */,
 				B697995A18A2DCBA000AA95C /* Views */,
 				B697995918A2DCB2000AA95C /* Models */,
@@ -354,6 +355,15 @@
 			name = "Tab 4";
 			sourceTree = "<group>";
 		};
+		B67E69B718BD4881001942E2 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B6E08C9218A54EB8008C6B8A /* FLLoginDelegate.h */,
+				B67E69B818BD48BA001942E2 /* FLDataSource.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		B697995818A2DCAB000AA95C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,7 +411,6 @@
 			children = (
 				B6117DC418A2A7C30004826A /* AppDelegate.h */,
 				B6117DC518A2A7C30004826A /* AppDelegate.m */,
-				B6E08C9218A54EB8008C6B8A /* FLLoginDelegate.h */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
