@@ -10,6 +10,6 @@
 #import "FLDataSource.h"
 #import <ReactiveCocoa/ReactiveCocoa/ReactiveCocoa.h>
 
-@interface FLParseApi : NSObject
+@interface FLParseApi : NSObject <FLDataSource>
 
 @end

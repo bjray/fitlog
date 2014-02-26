@@ -62,7 +62,7 @@
         PFQuery *query = [PFQuery queryWithClassName:@"ActivityType"];
         [query whereKey:@"isActive" equalTo:@YES];
         [self cachePolicyForQuery:query];
-        
+                
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 NSLog(@"retrieved %d activity types", [objects count]);

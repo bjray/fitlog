@@ -12,6 +12,6 @@
 
 @protocol FLDataSource <NSObject>
 
-- (void)findObjectsInBackgroundWithBlock:(FLArrayResultBlock)block;
+//- (void)findObjectsInBackgroundWithBlock:(FLArrayResultBlock)block;
 - (RACSignal *)fetchAllActivityTypes;
 @end
