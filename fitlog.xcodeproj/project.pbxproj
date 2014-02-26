@@ -70,6 +70,8 @@
 		B65FCCAE18B95A8300C9FF7F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996318A2DD2D000AA95C /* SettingsViewController.m */; };
 		B65FCCAF18B95A8300C9FF7F /* FLLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B612C9DA18A4323D00873167 /* FLLoginViewController.m */; };
 		B65FCCB318B95E6E00C9FF7F /* FLActivityTypeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B65FCCB218B95E6E00C9FF7F /* FLActivityTypeTests.m */; };
+		B67E69BB18BD70F9001942E2 /* FLActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = B67E69BA18BD70F9001942E2 /* FLActivity.m */; };
+		B67E69BC18BD70F9001942E2 /* FLActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = B67E69BA18BD70F9001942E2 /* FLActivity.m */; };
 		B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697995618A2DCA5000AA95C /* ActivityViewController.m */; };
 		B697996118A2DD15000AA95C /* ActivityLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996018A2DD15000AA95C /* ActivityLogViewController.m */; };
 		B697996418A2DD2D000AA95C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B697996318A2DD2D000AA95C /* SettingsViewController.m */; };
@@ -144,6 +146,8 @@
 		B648EC0018AD47D000F44826 /* FLActivityItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityItemCell.m; sourceTree = "<group>"; };
 		B65FCC9B18B9579600C9FF7F /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		B65FCCB218B95E6E00C9FF7F /* FLActivityTypeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivityTypeTests.m; sourceTree = "<group>"; };
+		B67E69B918BD70F9001942E2 /* FLActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLActivity.h; sourceTree = "<group>"; };
+		B67E69BA18BD70F9001942E2 /* FLActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLActivity.m; sourceTree = "<group>"; };
 		B697995518A2DCA5000AA95C /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		B697995618A2DCA5000AA95C /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		B697995F18A2DD15000AA95C /* ActivityLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLogViewController.h; sourceTree = "<group>"; };
@@ -374,6 +378,8 @@
 				B61054AE18B31E2B003AC9E2 /* FLUser.m */,
 				B61054B118B31E44003AC9E2 /* FLActivityType.h */,
 				B61054B218B31E44003AC9E2 /* FLActivityType.m */,
+				B67E69B918BD70F9001942E2 /* FLActivity.h */,
+				B67E69BA18BD70F9001942E2 /* FLActivity.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -543,6 +549,7 @@
 				B6117DC218A2A7C30004826A /* main.m in Sources */,
 				B61054AF18B31E2B003AC9E2 /* FLUser.m in Sources */,
 				B61054B318B31E44003AC9E2 /* FLActivityType.m in Sources */,
+				B67E69BB18BD70F9001942E2 /* FLActivity.m in Sources */,
 				B697995718A2DCA5000AA95C /* ActivityViewController.m in Sources */,
 				B648EBF918AC988700F44826 /* FLActivitySelectionViewController.m in Sources */,
 				B6E08CA218A6DB34008C6B8A /* FLActivityListViewController.m in Sources */,
@@ -567,6 +574,7 @@
 				B6E08CA318A6DB34008C6B8A /* FLActivityListViewController.m in Sources */,
 				B61054B018B31E2B003AC9E2 /* FLUser.m in Sources */,
 				B612C9B918A311E100873167 /* FavoriteActivityViewController.m in Sources */,
+				B67E69BC18BD70F9001942E2 /* FLActivity.m in Sources */,
 				B648EBFE18AD40D700F44826 /* FLSessionViewController.m in Sources */,
 				B648EBF618AC977C00F44826 /* FLActivityItemCollectionCell.m in Sources */,
 				B648EBEE18AC93BC00F44826 /* FLActivityDetailsViewController.m in Sources */,
