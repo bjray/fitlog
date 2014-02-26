@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FLConstants.h"
 @class RACSignal;
 
 @protocol FLDataSource <NSObject>
