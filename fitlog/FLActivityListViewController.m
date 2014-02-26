@@ -37,7 +37,7 @@
     
 	self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
     self.searchDisplayController.searchBar.barStyle = UIBarStyleBlackTranslucent;
-    [TSMessage setDefaultViewController:self];
+    [TSMessage setDefaultViewController:self.navigationController];
     self.extendedLayoutIncludesOpaqueBars = YES;
 }
 
@@ -61,11 +61,12 @@
         self.activities = activityList;
         
         [self.tableView reloadData];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+        [hud hide:YES];
     } error:^(NSError *error) {
         NSLog(@"inner oh no!");
-        //        [self displayError:error optionalMsg:nil];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self displayError:error optionalMsg:nil];
+        [hud hide:YES];
     }];
     
 }

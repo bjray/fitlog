@@ -36,7 +36,7 @@
     self.myActivities = [NSMutableArray array];
     self.activities = [NSArray array];
     
-    [TSMessage setDefaultViewController:self];
+    [TSMessage setDefaultViewController:self.navigationController];
     [self fetchData];
 }
 
@@ -52,7 +52,6 @@
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"Loading...";
     
-    
     [[[FLActivityManager sharedManager] fetchAllActivityTypes] subscribeNext:^(NSArray *newActivities) {
         NSLog(@"from fetch: %d", [newActivities count]);
         self.activities = newActivities;
@@ -66,14 +65,16 @@
         } error:^(NSError *error) {
             NSLog(@"inner oh no!");
             [self displayError:error optionalMsg:nil];
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [hud hide:YES];
+//            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
         
         
     } error:^(NSError *error) {
         NSLog(@"outer oh no!");
         [self displayError:error optionalMsg:nil];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [hud hide:YES];
     }];
 }
 
@@ -101,28 +102,46 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    FLActivityType *activity = [self.activities objectAtIndex:indexPath.row];
+    FLActivityType *activityType = [self.activities objectAtIndex:indexPath.row];
+    
     
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
-        [[[FLActivityManager sharedManager] saveFavoriteActivity:activity forUser:[PFUser currentUser]] subscribeError:^(NSError *error) {
-            [self displayError:error optionalMsg:@"Failed to save favorite."];
-        } completed:^{
-            [TSMessage showNotificationWithTitle:@"Yeah!" subtitle:@"How do you like them apples?" type:TSMessageNotificationTypeSuccess];
-            
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }];
-
-        
+        [self saveFavoriteActivityType:activityType forCell:cell];
     } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-        //make remove request...
-        [[[FLActivityManager sharedManager] removeFavoriteActivity:activity forUser:[PFUser currentUser]]
-         subscribeError:^(NSError *error) {
-             [self displayError:error optionalMsg:@"Failed to remove favorite."];
-         } completed:^{
-             cell.accessoryType = UITableViewCellAccessoryNone;
-         }];
+        [self removeFavoriteActivityType:activityType forCell:cell];
     }
 }
+
+#pragma mark - Helpers
+- (void)saveFavoriteActivityType:(FLActivityType *)activityType forCell:(UITableViewCell *)cell {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Saving...";
+    
+    [[[FLActivityManager sharedManager] saveFavoriteActivity:activityType forUser:[PFUser currentUser]] subscribeError:^(NSError *error) {
+        [self displayError:error optionalMsg:@"Failed to save favorite."];
+    } completed:^{
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [hud hide:YES];
+    }];
+}
+
+- (void)removeFavoriteActivityType:(FLActivityType *)activityType forCell:(UITableViewCell *)cell {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Removing...";
+    
+    [[[FLActivityManager sharedManager] removeFavoriteActivity:activityType forUser:[PFUser currentUser]]
+     subscribeError:^(NSError *error) {
+         [self displayError:error optionalMsg:@"Failed to remove favorite."];
+     } completed:^{
+         cell.accessoryType = UITableViewCellAccessoryNone;
+         [hud hide:YES];
+     }];
+}
+
 
 - (void)displayError:(NSError *)error optionalMsg:(NSString *)optionalMsg{
     NSString *msg = [NSString stringWithFormat:@"%@ %@", [error localizedDescription], optionalMsg];
