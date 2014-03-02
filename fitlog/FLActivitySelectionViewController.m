@@ -13,7 +13,7 @@
 #import "MBProgressHUD.h"
 
 @interface FLActivitySelectionViewController ()
-@property (nonatomic, retain)NSArray *favoriteActivities;
+@property (nonatomic, retain)NSArray *favoriteActivityTypes;
 @end
 
 @implementation FLActivitySelectionViewController
@@ -31,7 +31,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"Log an Activity";
-    self.favoriteActivities = [NSArray array];
+    self.favoriteActivityTypes = [NSArray array];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -52,7 +52,7 @@
     hud.labelText = @"Loading...";
     
     [[[FLActivityManager sharedManager] fetchFavoriteActivitiesForUser:[PFUser currentUser]] subscribeNext:^(NSArray *favs) {
-        self.favoriteActivities = favs;
+        self.favoriteActivityTypes = favs;
         
         [self.collectionView reloadData];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -69,8 +69,7 @@
     //[self performSegueWithIdentifier:@"SessionSegue" sender:self];
 }
 
-#pragma mark – Navigation Code
-
+#pragma mark - Navigation Code
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     UIViewController *destination = [segue destinationViewController];
@@ -79,7 +78,7 @@
         NSLog(@"handle ActivityDetailsSegue");
         if ([destination respondsToSelector:@selector(setActivityType:)]) {
             NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
-            FLActivityType *selectedActivity = [self.favoriteActivities objectAtIndex:indexPath.row];
+            FLActivityType *selectedActivity = [self.favoriteActivityTypes objectAtIndex:indexPath.row];
             [destination setValue:selectedActivity forKey:@"activityType"];
         }
     } else if ([segue.identifier isEqualToString:@"ActivityFullListSegue"]) {
@@ -101,19 +100,13 @@
     NSInteger row = indexPath.row;
     
     FLActivityItemCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ActivityItemCell" forIndexPath:indexPath];
-//    cell.layer.cornerRadius = 5;
-//    cell.layer.masksToBounds = YES;
-//    cell.layer.masksToBounds = NO;
-//    cell.layer.shadowOpacity = 0.9f;
-//    cell.layer.shadowRadius = 0.5;
-//    cell.layer.shadowOffset = CGSizeMake(0.5f, 0.5f);
     
     if (row == 7) {
         cell.activityLabel.text = @"view all";
-    } else if (row >= self.favoriteActivities.count) {
+    } else if (row >= self.favoriteActivityTypes.count) {
         cell.activityLabel.text = @"+";
     } else {
-        FLActivityType *activity = [self.favoriteActivities objectAtIndex:row];
+        FLActivityType *activity = [self.favoriteActivityTypes objectAtIndex:row];
         cell.activityLabel.text = activity.name;
     }
     
@@ -124,17 +117,20 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    //TODO: Temp code...
+    NSInteger row = indexPath.row;
+    NSInteger count = self.favoriteActivityTypes.count;
+    NSLog(@"row: %d, count: %d", row, count);
+
     if (indexPath.row == 7) {
         //go to activity full list...
         [self performSegueWithIdentifier:@"ActivityFullListSegue" sender:cell];
-    } else if (indexPath.row >= [FLActivityManager sharedManager].favoriteActivityTypes.count) {
+    } else if (indexPath.row >= self.favoriteActivityTypes.count) {
         NSString *activity = @"new activity";
         NSLog(@"Selected activity: %@,  in row: %d", activity, indexPath.row);
-        [self performSegueWithIdentifier:@"ActivityDetailsSegue" sender:cell];
+        [self performSegueWithIdentifier:@"NewActivityTypeSegue" sender:cell];
     } else {
         //go to activity details...
-        NSString *activity = [[FLActivityManager sharedManager].favoriteActivityTypes objectAtIndex:indexPath.row];
+        NSString *activity = [self.favoriteActivityTypes objectAtIndex:indexPath.row];
         NSLog(@"Selected activity: %@,  in row: %d", activity, indexPath.row);
         [self performSegueWithIdentifier:@"ActivityDetailsSegue" sender:cell];
     }

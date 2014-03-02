@@ -21,5 +21,7 @@
 @property (nonatomic, strong) FLActivityType *activityType;
 
 - (IBAction)completionDateChanged:(id)sender;
+- (IBAction)saveHandler:(id)sender;
+
 
 @end

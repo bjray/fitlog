@@ -51,6 +51,16 @@
     return result;
 }
 
+- (FLActivityType *)findActivityTypeFromActivities:(NSArray *)activities byName:(NSString *)name {
+    FLActivityType *result = nil;
+    for (FLActivityType *activityType in activities) {
+        if ([activityType.name isEqualToString:name]) {
+            result = activityType;
+            break;
+        }
+    }
+    return result;
+}
 
 #pragma mark - Data Requests...
 

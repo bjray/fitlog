@@ -14,7 +14,7 @@
 #import <TSMessages/TSMessage.h>
 
 @interface FLActivityListViewController ()
-@property (nonatomic, retain) NSArray *activities;
+@property (nonatomic, retain) NSArray *activityTypes;
 @end
 
 @implementation FLActivityListViewController
@@ -58,7 +58,7 @@
     hud.labelText = @"Loading...";
     
     [[[FLActivityManager sharedManager] fetchAllActivityTypes] subscribeNext:^(NSArray *activityList) {
-        self.activities = activityList;
+        self.activityTypes = activityList;
         
         [self.tableView reloadData];
 
@@ -82,7 +82,7 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return [_searchResults count];
     } else {
-        return self.activities.count;
+        return self.activityTypes.count;
     }
 }
 
@@ -107,7 +107,7 @@
         static NSString *CellIdentifier = @"ActivityCell";
         FLActivityItemCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         
-        activity = [self.activities objectAtIndex:indexPath.row];
+        activity = [self.activityTypes objectAtIndex:indexPath.row];
         cell.activityLabel.text = activity.name;
         return cell;
     }
@@ -118,8 +118,9 @@
     
 	if (tableView == self.searchDisplayController.searchResultsTableView) {
 		NSLog(@"clicking on search cell");
-        //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         //perform segue...
+        [self performSegueWithIdentifier:@"ActivityDetailsFromListSegue" sender:cell];
     } else {
         NSLog(@"clicking on normal tablecell");
     }
@@ -141,7 +142,7 @@
 
 - (NSArray *)filterActivities:(NSString *)searchText {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name contains[c] %@", searchText];
-    return [self.activities filteredArrayUsingPredicate:predicate];
+    return [self.activityTypes filteredArrayUsingPredicate:predicate];
 }
 
 #pragma mark - Helper methods...
@@ -149,5 +150,20 @@
     NSString *msg = [NSString stringWithFormat:@"%@ %@", [error localizedDescription], optionalMsg];
     
     [TSMessage showNotificationWithTitle:@"Error" subtitle:msg type:TSMessageNotificationTypeError];
+}
+
+
+
+#pragma mark - Navigation Code
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UIViewController *destination = [segue destinationViewController];
+    
+    if ([destination respondsToSelector:@selector(setActivityType:)]) {
+        //have to pull from cell because this call could be coming from search tableview
+        UITableViewCell *cell = (UITableViewCell *)sender;
+        FLActivityType *selectedActivity = [[FLActivityManager sharedManager] findActivityTypeFromActivities:self.activityTypes
+                                                                                                      byName:cell.textLabel.text];
+        [destination setValue:selectedActivity forKey:@"activityType"];
+    }
 }
 @end

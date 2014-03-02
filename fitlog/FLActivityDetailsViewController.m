@@ -8,6 +8,8 @@
 
 #import "FLActivityDetailsViewController.h"
 #import "FLActivityType.h"
+#import "MBProgressHUD.h"
+#import <TSMessages/TSMessage.h>
 
 @interface FLActivityDetailsViewController ()
 @property (nonatomic, retain)NSArray *secondsArray;
@@ -50,7 +52,8 @@
     
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
 	gestureRecognizer.cancelsTouchesInView = NO;
-	[self.navigationController.view addGestureRecognizer:gestureRecognizer];
+	[self.view addGestureRecognizer:gestureRecognizer];
+    [TSMessage setDefaultViewController:self.navigationController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,7 +64,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    self.nameLabel.text = self.activityType.name;
+    self.nameLabel.text = self.activityType.name;
 }
 
 #pragma mark - Table View
@@ -84,20 +87,19 @@
     if (indexPath.row == 0) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         if (self.descriptionLabel.hidden) {
-            //show description
+            [self showDescription];
             [self hidePicker:self.completionDatePicker];
             [self hidePicker:self.durationPicker];
         } else {
-            //hide description
+            [self hideDescription];
         }
     } else if (indexPath.row == 2) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         if (self.completionDatePicker.hidden) {
             [self showPicker:self.completionDatePicker atIndexPath:indexPath];
             [self hidePicker:self.durationPicker];
-            //hide description
+            [self hideDescription];
         } else {
-            //hide completion picker
             [self hidePicker:self.completionDatePicker];
         }
     } else if (indexPath.row == 4) {
@@ -106,13 +108,12 @@
             [self showPicker:self.durationPicker atIndexPath:indexPath];
             [self hidePicker:self.completionDatePicker];
         } else {
-            //hide duration picker
             [self hidePicker:self.durationPicker];
         }
     } else if (indexPath.row == 6) {
         [self.commentTextView becomeFirstResponder];
     } else {
-        //hide description
+        [self hideDescription];
         [self hidePicker:self.durationPicker];
         [self hidePicker:self.completionDatePicker];
     }
@@ -208,6 +209,10 @@
 #pragma mark - TextView Delegate Methods
 - (void)textViewDidBeginEditing:(UITextView *)textView {
 //    [self animateTextField:textView up:YES];
+    NSLog(@"did begin editing");
+    [self hideDescription];
+    [self hidePicker:self.completionDatePicker];
+    [self hidePicker:self.durationPicker];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
@@ -217,6 +222,9 @@
 
 
 
+
+
+#pragma mark - Helper Methods
 - (void)hideKeyboard
 {
 	// This trick dismissed the keyboard, no matter which text field or text
@@ -224,9 +232,8 @@
 	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
-#pragma mark - Helper Methods
 - (void)showPicker:(UIView *)picker atIndexPath:(NSIndexPath *)indexPath {
-    NSIndexPath *pickerCellPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
+//    NSIndexPath *pickerCellPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
 //    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:pickerCellPath];
     picker.hidden = NO;
     [self.tableView beginUpdates];
@@ -237,7 +244,6 @@
         picker.alpha = 1.0f;
     }];
     
-    [self.tableView scrollToRowAtIndexPath:pickerCellPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 - (void)hidePicker:(UIView *)picker {
@@ -253,11 +259,26 @@
 }
 
 - (void)showDescription {
+    self.descriptionLabel.hidden = NO;
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
     
+    self.descriptionLabel.alpha = 0.0;
+    [UIView animateWithDuration:0.25f animations:^{
+        self.descriptionLabel.alpha = 1.0f;
+    }];
 }
 
 - (void)hideDescription {
-    
+    if (!self.descriptionLabel.hidden) {
+        [UIView animateWithDuration:0.25f animations:^{
+            self.descriptionLabel.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+            self.descriptionLabel.hidden = YES;
+            [self.tableView beginUpdates];
+            [self.tableView endUpdates];
+        }];
+    }
 }
 
 - (NSString *)formatDate:(NSDate *)theDate
@@ -285,6 +306,10 @@
 #pragma mark - User Actions
 - (IBAction)completionDateChanged:(id)sender {
     self.completionDateLabel.text = [self formatDate:self.completionDatePicker.date];
+}
+
+- (IBAction)saveHandler:(id)sender {
+    [TSMessage showNotificationWithTitle:@"Save" subtitle:@"Not really saving" type:TSMessageNotificationTypeSuccess];
 }
 
 
