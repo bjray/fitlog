@@ -73,8 +73,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    UIViewController *destination = [segue destinationViewController];
+    
     if ([segue.identifier isEqualToString:@"ActivityDetailsSegue"] ) {
         NSLog(@"handle ActivityDetailsSegue");
+        if ([destination respondsToSelector:@selector(setActivityType:)]) {
+            NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
+            FLActivityType *selectedActivity = [self.favoriteActivities objectAtIndex:indexPath.row];
+            [destination setValue:selectedActivity forKey:@"activityType"];
+        }
     } else if ([segue.identifier isEqualToString:@"ActivityFullListSegue"]) {
         NSLog(@"handle ActivityFullListSegue");
     }
@@ -116,20 +123,20 @@
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     //TODO: Temp code...
     if (indexPath.row == 7) {
         //go to activity full list...
-        [self performSegueWithIdentifier:@"ActivityFullListSegue" sender:self];
+        [self performSegueWithIdentifier:@"ActivityFullListSegue" sender:cell];
     } else if (indexPath.row >= [FLActivityManager sharedManager].favoriteActivityTypes.count) {
         NSString *activity = @"new activity";
         NSLog(@"Selected activity: %@,  in row: %d", activity, indexPath.row);
-        [self performSegueWithIdentifier:@"ActivityDetailsSegue" sender:self];
+        [self performSegueWithIdentifier:@"ActivityDetailsSegue" sender:cell];
     } else {
         //go to activity details...
         NSString *activity = [[FLActivityManager sharedManager].favoriteActivityTypes objectAtIndex:indexPath.row];
         NSLog(@"Selected activity: %@,  in row: %d", activity, indexPath.row);
-        [self performSegueWithIdentifier:@"ActivityDetailsSegue" sender:self];
+        [self performSegueWithIdentifier:@"ActivityDetailsSegue" sender:cell];
     }
     
     

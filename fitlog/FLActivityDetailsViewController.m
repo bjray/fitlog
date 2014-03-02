@@ -7,13 +7,21 @@
 //
 
 #import "FLActivityDetailsViewController.h"
+#import "FLActivityType.h"
 
 @interface FLActivityDetailsViewController ()
-
+@property (nonatomic, retain)NSArray *secondsArray;
 @end
 
 @implementation FLActivityDetailsViewController
-
+{
+    BOOL _completionDatePickerVisible;
+    BOOL _durationPickerVisible;
+    BOOL _descriptionVisible;
+    NSInteger _hour;
+    NSInteger _minute;
+    NSInteger _second;
+}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -26,13 +34,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.commentsView.layer.cornerRadius = 8;
-    self.commentsView.layer.masksToBounds = NO;
-    self.commentsView.layer.shadowOpacity = 0.9f;
-    self.commentsView.layer.shadowRadius = 1;
-    self.commentsView.layer.shadowOffset = CGSizeMake(0.5f, 0.5f);
+    _completionDatePickerVisible = NO;
+    self.completionDatePicker.hidden = YES;
     
-	// Do any additional setup after loading the view.
+    _durationPickerVisible = NO;
+    self.durationPicker.hidden = YES;
+    
+    _descriptionVisible = NO;
+    self.descriptionLabel.hidden = YES;
+    _hour = 0;
+    _minute = 0;
+    _second = 0;
+    
+    self.secondsArray = @[@"0",@"15",@"30",@"45"];
+    
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+	gestureRecognizer.cancelsTouchesInView = NO;
+	[self.navigationController.view addGestureRecognizer:gestureRecognizer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,36 +59,233 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)saveHandler:(id)sender {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+//    self.nameLabel.text = self.activityType.name;
 }
 
-- (IBAction)backgroundTap:(id)sender {
-    [self.activityCommentsTextView resignFirstResponder];
-    NSLog(@"background tap");
+#pragma mark - Table View
+- (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 1) {
+        return self.descriptionLabel.hidden ? 0.0f : 132.0f;
+    } else if (indexPath.row == 3) {
+        return self.completionDatePicker.hidden ? 0.0f : 217.0f;
+    } else if (indexPath.row == 5) {
+        return self.durationPicker.hidden ? 0.0f : 217.0f;
+    } else if (indexPath.row == 6) {
+        return 176.0f;
+    } else {
+        return 44.0f;
+    }
+    
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        if (self.descriptionLabel.hidden) {
+            //show description
+            [self hidePicker:self.completionDatePicker];
+            [self hidePicker:self.durationPicker];
+        } else {
+            //hide description
+        }
+    } else if (indexPath.row == 2) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        if (self.completionDatePicker.hidden) {
+            [self showPicker:self.completionDatePicker atIndexPath:indexPath];
+            [self hidePicker:self.durationPicker];
+            //hide description
+        } else {
+            //hide completion picker
+            [self hidePicker:self.completionDatePicker];
+        }
+    } else if (indexPath.row == 4) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        if (self.durationPicker.hidden) {
+            [self showPicker:self.durationPicker atIndexPath:indexPath];
+            [self hidePicker:self.completionDatePicker];
+        } else {
+            //hide duration picker
+            [self hidePicker:self.durationPicker];
+        }
+    } else if (indexPath.row == 6) {
+        [self.commentTextView becomeFirstResponder];
+    } else {
+        //hide description
+        [self hidePicker:self.durationPicker];
+        [self hidePicker:self.completionDatePicker];
+    }
+    
+    
+    
+}
+
+#pragma mark - Picker DataSource Methods
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 6;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if (component == 1 || component == 3 || component == 5) {
+        return 1;
+    } else if (component == 4) {
+        return [self.secondsArray count];
+    } else {
+        return 60;
+    }
+}
+
+#pragma mark - Picker Delegate Methods
+-(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    NSString *title = @"";
+    
+    UILabel *label = (UILabel *)view;
+    if (!label) {
+        label = [[UILabel alloc] init];
+        label.font = [UIFont fontWithName:@"Avenir-Roman" size:14.0];
+    }
+    
+    switch (component) {
+        case 0:
+            title = [[NSNumber numberWithInt:row] stringValue];
+            label.textAlignment = NSTextAlignmentRight;
+            break;
+        case 1:
+            title = @"hr";
+            label.textAlignment = NSTextAlignmentLeft;
+            break;
+        case 2:
+            title = [[NSNumber numberWithInt:row] stringValue];
+            label.textAlignment = NSTextAlignmentRight;
+            break;
+        case 3:
+            title = @"min";
+            label.textAlignment = NSTextAlignmentLeft;
+            break;
+        case 4:
+            title = [self.secondsArray objectAtIndex:row];
+            label.textAlignment = NSTextAlignmentRight;
+            break;
+        case 5:
+            title = @"sec";
+            label.textAlignment = NSTextAlignmentLeft;
+            break;
+        default:
+            break;
+    }
+    label.text = title;
+    
+    return label;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    NSLog(@"picker row selected");
+    
+    if (component == 0) {
+        _hour = row;
+    } else if (component == 2) {
+        _minute = row;
+    } else if (component == 4) {
+        _second = [[_secondsArray objectAtIndex:row] integerValue];
+    }
+    
+    self.durationLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", _hour, _minute, _second];
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
+{
+	return 35.0;
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+	return 40.0;
+}
+
 
 #pragma mark - TextView Delegate Methods
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    [self animateTextField:textView up:YES];
+//    [self animateTextField:textView up:YES];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    [self animateTextField:textView up:NO];
+//    [self animateTextField:textView up:NO];
+    [textView resignFirstResponder];
 }
 
+
+
+- (void)hideKeyboard
+{
+	// This trick dismissed the keyboard, no matter which text field or text
+	// view is currently active.
+	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+}
 
 #pragma mark - Helper Methods
-- (void)animateTextField:(UITextView *)textField up:(BOOL)up
-{
-    const int movementDistance = 85;
-    const float movementDuration = 0.3f;
+- (void)showPicker:(UIView *)picker atIndexPath:(NSIndexPath *)indexPath {
+    NSIndexPath *pickerCellPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
+//    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:pickerCellPath];
+    picker.hidden = NO;
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
     
-    int movement = (up ? -movementDistance : movementDistance);
+    picker.alpha = 0.0f;
+    [UIView animateWithDuration:0.25f animations:^{
+        picker.alpha = 1.0f;
+    }];
     
-    [UIView beginAnimations: @"anim" context: nil];
-    [UIView setAnimationBeginsFromCurrentState: YES];
-    [UIView setAnimationDuration: movementDuration];
-    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
-    [UIView commitAnimations];
+    [self.tableView scrollToRowAtIndexPath:pickerCellPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
+
+- (void)hidePicker:(UIView *)picker {
+    if (!picker.hidden) {
+        [UIView animateWithDuration:0.25f animations:^{
+            picker.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+            picker.hidden = YES;
+            [self.tableView beginUpdates];
+            [self.tableView endUpdates];
+        }];
+    }
+}
+
+- (void)showDescription {
+    
+}
+
+- (void)hideDescription {
+    
+}
+
+- (NSString *)formatDate:(NSDate *)theDate
+{
+	static NSDateFormatter *formatter;
+	if (formatter == nil) {
+		formatter = [[NSDateFormatter alloc] init];
+		[formatter setDateStyle:NSDateFormatterMediumStyle];
+		[formatter setTimeStyle:NSDateFormatterShortStyle];
+	}
+    
+	return [formatter stringFromDate:theDate];
+}
+
+- (NSString *) formatTime:(NSDate *)theDate {
+    static NSDateFormatter *formatter;
+	if (formatter == nil) {
+		formatter = [[NSDateFormatter alloc] init];
+		[formatter setDateFormat:@"HH:mm"];
+	}
+    
+	return [formatter stringFromDate:theDate];
+}
+
+#pragma mark - User Actions
+- (IBAction)completionDateChanged:(id)sender {
+    self.completionDateLabel.text = [self formatDate:self.completionDatePicker.date];
+}
+
+
 @end
