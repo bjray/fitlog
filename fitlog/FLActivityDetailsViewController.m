@@ -17,9 +17,6 @@
 
 @implementation FLActivityDetailsViewController
 {
-    BOOL _completionDatePickerVisible;
-    BOOL _durationPickerVisible;
-    BOOL _descriptionVisible;
     NSInteger _hour;
     NSInteger _minute;
     NSInteger _second;
@@ -36,13 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _completionDatePickerVisible = NO;
     self.completionDatePicker.hidden = YES;
-    
-    _durationPickerVisible = NO;
     self.durationPicker.hidden = YES;
-    
-    _descriptionVisible = NO;
     self.descriptionLabel.hidden = YES;
     _hour = 0;
     _minute = 0;
@@ -88,8 +80,8 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         if (self.descriptionLabel.hidden) {
             [self showDescription];
-            [self hidePicker:self.completionDatePicker];
-            [self hidePicker:self.durationPicker];
+            [self hidePicker:self.completionDatePicker atIndexPath:nil];
+            [self hidePicker:self.durationPicker atIndexPath:nil];
         } else {
             [self hideDescription];
         }
@@ -97,25 +89,25 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         if (self.completionDatePicker.hidden) {
             [self showPicker:self.completionDatePicker atIndexPath:indexPath];
-            [self hidePicker:self.durationPicker];
+            [self hidePicker:self.durationPicker atIndexPath:nil];
             [self hideDescription];
         } else {
-            [self hidePicker:self.completionDatePicker];
+            [self hidePicker:self.completionDatePicker atIndexPath:indexPath];
         }
     } else if (indexPath.row == 4) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         if (self.durationPicker.hidden) {
             [self showPicker:self.durationPicker atIndexPath:indexPath];
-            [self hidePicker:self.completionDatePicker];
+            [self hidePicker:self.completionDatePicker atIndexPath:nil];
         } else {
-            [self hidePicker:self.durationPicker];
+            [self hidePicker:self.durationPicker atIndexPath:indexPath];
         }
     } else if (indexPath.row == 6) {
         [self.commentTextView becomeFirstResponder];
     } else {
         [self hideDescription];
-        [self hidePicker:self.durationPicker];
-        [self hidePicker:self.completionDatePicker];
+        [self hidePicker:self.durationPicker atIndexPath:nil];
+        [self hidePicker:self.completionDatePicker atIndexPath:nil];
     }
     
     
@@ -211,8 +203,8 @@
 //    [self animateTextField:textView up:YES];
     NSLog(@"did begin editing");
     [self hideDescription];
-    [self hidePicker:self.completionDatePicker];
-    [self hidePicker:self.durationPicker];
+    [self hidePicker:self.completionDatePicker atIndexPath:nil];
+    [self hidePicker:self.durationPicker atIndexPath:nil];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
@@ -234,7 +226,8 @@
 
 - (void)showPicker:(UIView *)picker atIndexPath:(NSIndexPath *)indexPath {
 //    NSIndexPath *pickerCellPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
-//    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:pickerCellPath];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.detailTextLabel.textColor = cell.detailTextLabel.tintColor;
     picker.hidden = NO;
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
@@ -246,7 +239,13 @@
     
 }
 
-- (void)hidePicker:(UIView *)picker {
+- (void)hidePicker:(UIView *)picker atIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath) {
+        NSLog(@"indexpath is not nil :%@", indexPath.description);
+    }
+//    self.completionDateLabel.textColor = [UIColor blackColor];
+//    self.durationLabel.textColor = [UIColor blackColor];
+    
     if (!picker.hidden) {
         [UIView animateWithDuration:0.25f animations:^{
             picker.alpha = 1.0f;

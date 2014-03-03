@@ -8,6 +8,7 @@
 
 #import "FLActivityManager.h"
 #import "FLActivityType.h"
+#import "FLActivity.h"
 
 @interface FLActivityManager()
 @property (strong, nonatomic, readwrite) NSArray *activityTypes;
@@ -160,10 +161,36 @@
         }];
 
         return [RACDisposable disposableWithBlock:^{
-            NSLog(@"nothign to dispose of...");
+            NSLog(@"nothing to dispose of...");
         }];
         
         
+    }];
+}
+
+- (RACSignal *)saveActivity:(FLActivity *)activity forUser:(PFUser *)user {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        //could move this behind an api...
+        PFObject *pfActivity = [PFObject objectWithClassName:@"Activity"];
+        pfActivity[@"name"] = activity.name;
+        pfActivity[@"comment"] = activity.comment;
+        pfActivity[@"count"] = [NSNumber numberWithInteger:activity.count];
+        pfActivity[@"completionDate"] = activity.completionDateStr;
+        pfActivity[@"duration"] = [NSNumber numberWithFloat:activity.duration];
+        pfActivity[@"activityType"] = [PFObject objectWithoutDataWithClassName:@"ActivityType" objectId:activity.activityTypeId];
+        
+        [pfActivity saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                [subscriber sendCompleted];
+            } else {
+                [subscriber sendError:error];
+            }
+        }];
+        
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"nothing to dispose of");
+        }];
     }];
 }
 
