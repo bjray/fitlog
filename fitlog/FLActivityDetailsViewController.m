@@ -7,9 +7,17 @@
 //
 
 #import "FLActivityDetailsViewController.h"
-#import "FLActivityType.h"
+#import "FLActivity.h"
 #import "MBProgressHUD.h"
 #import <TSMessages/TSMessage.h>
+
+
+#define DESCRIPTION_ROW 1
+#define REPEATS_ROW 2
+#define COMPLETION_ROW 4
+#define DURATION_ROW 6
+#define COMMENT_ROW 9
+#define ANIMATION_DURATION 0.25f
 
 @interface FLActivityDetailsViewController ()
 @property (nonatomic, retain)NSArray *secondsArray;
@@ -56,19 +64,25 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.nameLabel.text = self.activityType.name;
+    self.nameLabel.text = self.activity.name;
+    self.durationLabel.text = @"00:00:00";
+    self.completionDateLabel.text = self.activity.completionDateStr;
+    self.repeatsLabel.text = [NSString stringWithFormat:@"%d", self.activity.repeats];
+    self.repeatsTextField.text = [NSString stringWithFormat:@"%d", self.activity.repeats];
+    self.commentTextView.text = self.activity.comment;
 }
 
 #pragma mark - Table View
+
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 1) {
+    if (indexPath.row == DESCRIPTION_ROW) {
         return self.descriptionLabel.hidden ? 0.0f : 132.0f;
-    } else if (indexPath.row == 3) {
+    } else if (indexPath.row == COMPLETION_ROW) {
         return self.completionDatePicker.hidden ? 0.0f : 217.0f;
-    } else if (indexPath.row == 5) {
+    } else if (indexPath.row == DURATION_ROW) {
         return self.durationPicker.hidden ? 0.0f : 217.0f;
-    } else if (indexPath.row == 6) {
-        return 176.0f;
+    } else if (indexPath.row == COMMENT_ROW) {
+        return 140.0f;
     } else {
         return 44.0f;
     }
@@ -76,41 +90,44 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == DESCRIPTION_ROW-1) {
         if (self.descriptionLabel.hidden) {
             [self showDescription];
-            [self hidePicker:self.completionDatePicker atIndexPath:nil];
-            [self hidePicker:self.durationPicker atIndexPath:nil];
+            [self hidePicker:self.completionDatePicker withLabel:self.completionDateLabel];
+            [self hidePicker:self.durationPicker withLabel:self.durationLabel];
         } else {
             [self hideDescription];
         }
-    } else if (indexPath.row == 2) {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else if (indexPath.row == REPEATS_ROW) {
+        if (self.repeatsTextField.hidden) {
+            [self showRepeatsTextField];
+        } else {
+            [self hideRepeatsTextField];
+        }
+    } else if (indexPath.row == COMPLETION_ROW-1) {
+
         if (self.completionDatePicker.hidden) {
-            [self showPicker:self.completionDatePicker atIndexPath:indexPath];
-            [self hidePicker:self.durationPicker atIndexPath:nil];
+            [self showPicker:self.completionDatePicker withLabel:self.completionDateLabel];
+            [self hidePicker:self.durationPicker withLabel:self.durationLabel];
             [self hideDescription];
         } else {
-            [self hidePicker:self.completionDatePicker atIndexPath:indexPath];
+            [self hidePicker:self.completionDatePicker withLabel:self.completionDateLabel];
         }
-    } else if (indexPath.row == 4) {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else if (indexPath.row == DURATION_ROW-1) {
         if (self.durationPicker.hidden) {
-            [self showPicker:self.durationPicker atIndexPath:indexPath];
-            [self hidePicker:self.completionDatePicker atIndexPath:nil];
+            [self showPicker:self.durationPicker withLabel:self.durationLabel];
+            [self hidePicker:self.completionDatePicker withLabel:self.completionDateLabel];
         } else {
-            [self hidePicker:self.durationPicker atIndexPath:indexPath];
+            [self hidePicker:self.durationPicker withLabel:self.durationLabel];
         }
-    } else if (indexPath.row == 6) {
-        [self.commentTextView becomeFirstResponder];
     } else {
         [self hideDescription];
-        [self hidePicker:self.durationPicker atIndexPath:nil];
-        [self hidePicker:self.completionDatePicker atIndexPath:nil];
+        [self hidePicker:self.durationPicker withLabel:self.durationLabel];
+        [self hidePicker:self.completionDatePicker withLabel:self.completionDateLabel];
+        [self hideRepeatsTextField];
     }
     
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 
@@ -197,18 +214,22 @@
 	return 40.0;
 }
 
+#pragma mark - TextField Delegate Methods
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.repeatsLabel.text = textField.text;
+    self.activity.repeats = [textField.text integerValue];
+}
 
 #pragma mark - TextView Delegate Methods
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-//    [self animateTextField:textView up:YES];
-    NSLog(@"did begin editing");
     [self hideDescription];
-    [self hidePicker:self.completionDatePicker atIndexPath:nil];
-    [self hidePicker:self.durationPicker atIndexPath:nil];
+    [self hidePicker:self.completionDatePicker withLabel:self.completionDateLabel];
+    [self hidePicker:self.durationPicker withLabel:self.durationLabel];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
 //    [self animateTextField:textView up:NO];
+    self.activity.comment = textView.text;
     [textView resignFirstResponder];
 }
 
@@ -224,30 +245,26 @@
 	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
-- (void)showPicker:(UIView *)picker atIndexPath:(NSIndexPath *)indexPath {
+- (void)showPicker:(UIView *)picker withLabel:(UILabel *)label {
 //    NSIndexPath *pickerCellPath = [NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section];
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    cell.detailTextLabel.textColor = cell.detailTextLabel.tintColor;
+    label.textColor = self.tableView.tintColor;
     picker.hidden = NO;
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
     
     picker.alpha = 0.0f;
-    [UIView animateWithDuration:0.25f animations:^{
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         picker.alpha = 1.0f;
     }];
     
 }
 
-- (void)hidePicker:(UIView *)picker atIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath) {
-        NSLog(@"indexpath is not nil :%@", indexPath.description);
-    }
-//    self.completionDateLabel.textColor = [UIColor blackColor];
-//    self.durationLabel.textColor = [UIColor blackColor];
+- (void)hidePicker:(UIView *)picker withLabel:(UILabel *)label {
+
+    label.textColor = [UIColor blackColor];
     
     if (!picker.hidden) {
-        [UIView animateWithDuration:0.25f animations:^{
+        [UIView animateWithDuration:ANIMATION_DURATION animations:^{
             picker.alpha = 1.0f;
         } completion:^(BOOL finished) {
             picker.hidden = YES;
@@ -263,19 +280,39 @@
     [self.tableView endUpdates];
     
     self.descriptionLabel.alpha = 0.0;
-    [UIView animateWithDuration:0.25f animations:^{
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         self.descriptionLabel.alpha = 1.0f;
     }];
 }
 
 - (void)hideDescription {
     if (!self.descriptionLabel.hidden) {
-        [UIView animateWithDuration:0.25f animations:^{
+        [UIView animateWithDuration:ANIMATION_DURATION animations:^{
             self.descriptionLabel.alpha = 1.0f;
         } completion:^(BOOL finished) {
             self.descriptionLabel.hidden = YES;
             [self.tableView beginUpdates];
             [self.tableView endUpdates];
+        }];
+    }
+}
+
+- (void)showRepeatsTextField {
+    self.repeatsTextField.hidden = NO;
+    self.repeatsLabel.hidden = YES;
+    self.repeatsTextField.alpha = 0.0;
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+        self.repeatsTextField.alpha = 1.0f;
+    }];
+}
+
+- (void)hideRepeatsTextField {
+    if (!self.repeatsTextField.hidden) {
+        self.repeatsTextField.hidden = YES;
+        self.repeatsLabel.hidden = NO;
+        self.repeatsLabel.alpha = 0.0;
+        [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+            self.repeatsLabel.alpha = 1.0f;
         }];
     }
 }
@@ -308,7 +345,21 @@
 }
 
 - (IBAction)saveHandler:(id)sender {
+    [self hideDescription];
+    [self hidePicker:self.completionDatePicker withLabel:self.completionDateLabel];
+    [self hidePicker:self.durationPicker withLabel:self.durationLabel];
     [TSMessage showNotificationWithTitle:@"Save" subtitle:@"Not really saving" type:TSMessageNotificationTypeSuccess];
+    [self hideKeyboard];
+}
+
+- (IBAction)displayActivityDescription:(id)sender {
+    if (self.descriptionLabel.hidden) {
+        [self showDescription];
+        [self hidePicker:self.completionDatePicker withLabel:self.completionDateLabel];
+        [self hidePicker:self.durationPicker withLabel:self.durationLabel];
+    } else {
+        [self hideDescription];
+    }
 }
 
 

@@ -7,15 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FLActivityType.h"
 
 @interface FLActivity : NSObject
 @property (nonatomic, copy) NSString *objectId;
 @property (nonatomic, copy) NSString *activityTypeId;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *comment;
-@property NSInteger count;
+@property NSInteger repeats;
 @property NSTimeInterval duration;
 @property (nonatomic, retain) NSDate *completionDate;
-@property (nonatomic, retain) NSString *completionDateStr;
+@property (nonatomic, retain, readonly) NSString *completionDateStr;
 @property (nonatomic, retain) CLLocation *location;
+
+
+- (id)initWithActivityType:(FLActivityType *)activityType dateTime:(NSDate *)date;
 @end

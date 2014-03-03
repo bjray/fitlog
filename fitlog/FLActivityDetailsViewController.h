@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 @class FLActivityType;
+@class FLActivity;
 
-@interface FLActivityDetailsViewController : UITableViewController <UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface FLActivityDetailsViewController : UITableViewController <UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
@@ -17,11 +18,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *durationLabel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *completionDatePicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *durationPicker;
+@property (weak, nonatomic) IBOutlet UILabel *repeatsLabel;
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
-@property (nonatomic, strong) FLActivityType *activityType;
+//@property (nonatomic, strong) FLActivityType *activityType;
+@property (weak, nonatomic) IBOutlet UITextField *repeatsTextField;
+@property (nonatomic, strong) FLActivity *activity;
 
 - (IBAction)completionDateChanged:(id)sender;
 - (IBAction)saveHandler:(id)sender;
+- (IBAction)displayActivityDescription:(id)sender;
 
 
 @end

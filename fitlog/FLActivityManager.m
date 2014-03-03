@@ -175,7 +175,7 @@
         PFObject *pfActivity = [PFObject objectWithClassName:@"Activity"];
         pfActivity[@"name"] = activity.name;
         pfActivity[@"comment"] = activity.comment;
-        pfActivity[@"count"] = [NSNumber numberWithInteger:activity.count];
+        pfActivity[@"repeats"] = [NSNumber numberWithInteger:activity.repeats];
         pfActivity[@"completionDate"] = activity.completionDateStr;
         pfActivity[@"duration"] = [NSNumber numberWithFloat:activity.duration];
         pfActivity[@"activityType"] = [PFObject objectWithoutDataWithClassName:@"ActivityType" objectId:activity.activityTypeId];

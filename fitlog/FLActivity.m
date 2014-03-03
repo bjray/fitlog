@@ -9,7 +9,46 @@
 #import "FLActivity.h"
 
 @implementation FLActivity
-//- (id)initWithActivityType:(FLActivityType *)activityType user:(PFUser *)user dateTime:(NSDate *)date;
 
 
+- (id)init {
+    return [self initWithActivityType:nil dateTime:[NSDate date]];
+}
+
+- (id)initWithActivityType:(FLActivityType *)activityType dateTime:(NSDate *)date {
+    self = [super init];
+    if (self) {
+        if (activityType) {
+            self.activityTypeId = activityType.objectId;
+            self.name = activityType.name;
+        } else {
+            self.activityTypeId = nil;
+            self.name = @"New Activity";
+        }
+        
+        self.completionDate = date;
+        self.activityTypeId = nil;
+        self.comment = nil;
+        self.duration = 0;
+        self.repeats = 1;
+    }
+    return self;
+}
+
+- (NSString *)completionDateStr {
+    return [self formatDate:self.completionDate];
+}
+
+
+- (NSString *)formatDate:(NSDate *)theDate
+{
+	static NSDateFormatter *formatter;
+	if (formatter == nil) {
+		formatter = [[NSDateFormatter alloc] init];
+		[formatter setDateStyle:NSDateFormatterMediumStyle];
+		[formatter setTimeStyle:NSDateFormatterShortStyle];
+	}
+    
+	return [formatter stringFromDate:theDate];
+}
 @end

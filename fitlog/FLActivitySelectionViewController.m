@@ -10,6 +10,7 @@
 #import "FLActivityItemCollectionCell.h"
 #import "FLActivityManager.h"
 #import "FLActivityType.h"
+#import "FLActivity.h"
 #import "MBProgressHUD.h"
 
 @interface FLActivitySelectionViewController ()
@@ -76,10 +77,11 @@
     
     if ([segue.identifier isEqualToString:@"ActivityDetailsSegue"] ) {
         NSLog(@"handle ActivityDetailsSegue");
-        if ([destination respondsToSelector:@selector(setActivityType:)]) {
+        if ([destination respondsToSelector:@selector(setActivity:)]) {
             NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
             FLActivityType *selectedActivity = [self.favoriteActivityTypes objectAtIndex:indexPath.row];
-            [destination setValue:selectedActivity forKey:@"activityType"];
+            FLActivity *newActivity = [[FLActivity alloc] initWithActivityType:selectedActivity dateTime:[NSDate date]];
+            [destination setValue:newActivity forKey:@"activity"];
         }
     } else if ([segue.identifier isEqualToString:@"ActivityFullListSegue"]) {
         NSLog(@"handle ActivityFullListSegue");
