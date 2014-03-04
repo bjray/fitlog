@@ -171,12 +171,13 @@
 - (RACSignal *)saveActivity:(FLActivity *)activity forUser:(PFUser *)user {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         
+        NSLog(@"activity: %@", activity);
         //could move this behind an api...
         PFObject *pfActivity = [PFObject objectWithClassName:@"Activity"];
         pfActivity[@"name"] = activity.name;
         pfActivity[@"comment"] = activity.comment;
         pfActivity[@"repeats"] = [NSNumber numberWithInteger:activity.repeats];
-        pfActivity[@"completionDate"] = activity.completionDateStr;
+        pfActivity[@"completionDate"] = activity.completionDate;
         pfActivity[@"duration"] = [NSNumber numberWithFloat:activity.duration];
         pfActivity[@"activityType"] = [PFObject objectWithoutDataWithClassName:@"ActivityType" objectId:activity.activityTypeId];
         
@@ -187,6 +188,7 @@
                 [subscriber sendError:error];
             }
         }];
+//        [subscriber sendCompleted];
         
         return [RACDisposable disposableWithBlock:^{
             NSLog(@"nothing to dispose of");

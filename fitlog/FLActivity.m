@@ -27,7 +27,6 @@
         }
         
         self.completionDate = date;
-        self.activityTypeId = nil;
         self.comment = nil;
         self.duration = 0;
         self.repeats = 1;
@@ -50,5 +49,17 @@
 	}
     
 	return [formatter stringFromDate:theDate];
+}
+
+- (NSString *)description {
+    NSString *times = @"time";
+//    NSString *duration = @"";
+    
+    if (self.repeats > 1) {
+        times = @"times";
+    }
+    NSString *result = [NSString stringWithFormat:@"%@ performed %d %@ on %@.", self.name, self.repeats, times, [self formatDate:self.completionDate]];
+    
+    return result;
 }
 @end

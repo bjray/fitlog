@@ -7,6 +7,7 @@
 //
 
 #import "FLSessionViewController.h"
+#import "FLUtility.h"
 
 @interface FLSessionViewController ()
 @property (nonatomic, retain) NSTimer *sessionTimer;
@@ -113,16 +114,7 @@
 
 - (void)updateLabel {
     self.currentInterval = -1*[self.sessionDate timeIntervalSinceNow];
-    self.timerLabel.text = [self stringFromTimeInterval:self.currentInterval];
-}
-
-- (NSString *)stringFromTimeInterval:(NSTimeInterval) interval {
-    double ti = interval + self.sessionInterval;
-    
-    NSInteger millisecond = (NSInteger)(fmod((ti), 1) * 100);
-    NSInteger seconds = (NSInteger)fmod((ti), 60);
-    NSInteger minutes = ((NSInteger)(ti)/60)%60;
-    
-    return [NSString stringWithFormat:@"%02i:%02i:%02i", minutes, seconds, millisecond];
+//    self.timerLabel.text = [self stringFromTimeInterval:self.currentInterval];
+    self.timerLabel.text = [FLUtility stringFromTimeInterval:self.currentInterval withBaseInterval:self.sessionInterval];
 }
 @end

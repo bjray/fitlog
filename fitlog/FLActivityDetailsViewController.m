@@ -8,8 +8,11 @@
 
 #import "FLActivityDetailsViewController.h"
 #import "FLActivity.h"
+#import "FLActivityManager.h"
+#import "FLUtility.h"
 #import "MBProgressHUD.h"
 #import <TSMessages/TSMessage.h>
+#import <ReactiveCocoa/ReactiveCocoa/ReactiveCocoa.h>
 
 
 #define DESCRIPTION_ROW 1
@@ -44,9 +47,9 @@
     self.completionDatePicker.hidden = YES;
     self.durationPicker.hidden = YES;
     self.descriptionLabel.hidden = YES;
-    _hour = 0;
-    _minute = 0;
-    _second = 0;
+    _hour = [FLUtility hoursFromTimeInterval:self.activity.duration];
+    _minute = [FLUtility cappedMinutesFromTimeInterval:self.activity.duration];
+    _second = [FLUtility cappedSecondsFromTimeInterval:self.activity.duration];
     
     self.secondsArray = @[@"0",@"15",@"30",@"45"];
     
@@ -65,7 +68,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.nameLabel.text = self.activity.name;
-    self.durationLabel.text = @"00:00:00";
+//    self.durationLabel.text = @"00:00:00";
+    self.durationLabel.text = [FLUtility stringFromTimeInterval:self.activity.duration];
     self.completionDateLabel.text = self.activity.completionDateStr;
     self.repeatsLabel.text = [NSString stringWithFormat:@"%d", self.activity.repeats];
     self.repeatsTextField.text = [NSString stringWithFormat:@"%d", self.activity.repeats];
@@ -200,8 +204,10 @@
     } else if (component == 4) {
         _second = [[_secondsArray objectAtIndex:row] integerValue];
     }
+    self.activity.duration = [FLUtility timeIntervalFromHours:_hour minutes:_minute seconds:_second];
     
-    self.durationLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", _hour, _minute, _second];
+    self.durationLabel.text = [FLUtility stringFromTimeInterval:self.activity.duration];
+//    self.durationLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", _hour, _minute, _second];
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
@@ -216,8 +222,15 @@
 
 #pragma mark - TextField Delegate Methods
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    self.repeatsLabel.text = textField.text;
-    self.activity.repeats = [textField.text integerValue];
+    NSString *value = textField.text;
+    if (value.length == 0) {
+        value = @"1";
+    }
+    self.repeatsLabel.text = value;
+    self.activity.repeats = [value integerValue];
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    return YES;
 }
 
 #pragma mark - TextView Delegate Methods
@@ -303,6 +316,9 @@
     self.repeatsTextField.alpha = 0.0;
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         self.repeatsTextField.alpha = 1.0f;
+    } completion:^(BOOL finished) {
+        [self.repeatsTextField becomeFirstResponder];
+//        self.repeatsTextField.becomeFirstResponder = YES;
     }];
 }
 
@@ -329,15 +345,14 @@
 	return [formatter stringFromDate:theDate];
 }
 
-- (NSString *) formatTime:(NSDate *)theDate {
-    static NSDateFormatter *formatter;
-	if (formatter == nil) {
-		formatter = [[NSDateFormatter alloc] init];
-		[formatter setDateFormat:@"HH:mm"];
-	}
-    
-	return [formatter stringFromDate:theDate];
-}
+//- (NSString *) formatTime:(NSDate *)theDate {
+//    static NSDateFormatter *formatter;
+//	if (formatter == nil) {
+//		formatter = [[NSDateFormatter alloc] init];
+//		[formatter setDateFormat:@"HH:mm"];
+//	}
+//	return [formatter stringFromDate:theDate];
+//}
 
 #pragma mark - User Actions
 - (IBAction)completionDateChanged:(id)sender {
@@ -348,8 +363,19 @@
     [self hideDescription];
     [self hidePicker:self.completionDatePicker withLabel:self.completionDateLabel];
     [self hidePicker:self.durationPicker withLabel:self.durationLabel];
-    [TSMessage showNotificationWithTitle:@"Save" subtitle:@"Not really saving" type:TSMessageNotificationTypeSuccess];
     [self hideKeyboard];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Saving...";
+    
+    [[[FLActivityManager sharedManager] saveActivity:self.activity forUser:[PFUser currentUser]] subscribeError:^(NSError *error) {
+        [TSMessage showNotificationWithTitle:@"Error" subtitle:@"Failed to save activity." type:TSMessageNotificationTypeError];
+        [hud hide:YES];
+    } completed:^{
+        [hud hide:YES];
+        [TSMessage showNotificationWithTitle:@"Save" subtitle:@"Way to go!" type:TSMessageNotificationTypeSuccess];
+    }];
 }
 
 - (IBAction)displayActivityDescription:(id)sender {
