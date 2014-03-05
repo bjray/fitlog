@@ -104,6 +104,7 @@
             } else {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
                 [subscriber sendError:error];
+//                kPFErrorCacheMiss
             }
             
         }];
@@ -241,7 +242,14 @@
 
 
 - (void)cachePolicyForQuery:(PFQuery *)aQuery {
-    aQuery.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    if ([aQuery hasCachedResult]) {
+        aQuery.cachePolicy = kPFCachePolicyCacheThenNetwork;
+        NSLog(@"pull from cache first");
+    } else {
+        aQuery.cachePolicy = kPFCachePolicyNetworkOnly;
+        NSLog(@"no cache - pull from network");
+    }
+    
     aQuery.maxCacheAge = 60 * 60 * 24; //one day
 }
 

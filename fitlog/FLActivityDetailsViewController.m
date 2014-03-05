@@ -247,7 +247,10 @@
 }
 
 
-
+#pragma mark - AlertView Delegate methods
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    [self closeHandler:nil];
+}
 
 
 #pragma mark - Helper Methods
@@ -374,7 +377,25 @@
         [hud hide:YES];
     } completed:^{
         [hud hide:YES];
-        [TSMessage showNotificationWithTitle:@"Save" subtitle:@"Way to go!" type:TSMessageNotificationTypeSuccess];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save Successful"
+                                                        message:@"You just made another step forward!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles: nil];
+        [alert show];
+//        [TSMessage showNotificationWithTitle:@"Save" subtitle:@"Way to go!" type:TSMessageNotificationTypeSuccess];
+//        [TSMessage showNotificationInViewController:self.navigationController
+//                                              title:@"Save"
+//                                           subtitle:@"Way to go!"
+//                                               type:TSMessageNotificationTypeSuccess
+//                                           duration:1.5
+//                                           callback:^{
+//                                               NSLog(@"callback executed...");
+//                                               [self.navigationController popViewControllerAnimated:YES];
+//                                           } buttonTitle:nil
+//                                     buttonCallback:nil
+//                                         atPosition:TSMessageNotificationPositionTop
+//                                canBeDismisedByUser:YES];
     }];
 }
 
@@ -387,6 +408,12 @@
         [self hideDescription];
     }
 }
+
+- (IBAction)closeHandler:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 
 
 @end
